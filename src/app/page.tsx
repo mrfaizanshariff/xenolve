@@ -11,8 +11,8 @@ export default  function Home() {
     color:"#ef9671"
   }
   return (
-  <div className="py-16 px-20 relative gradient-blur">
-    <section className="flex  relative p-36 md:p-56 justify-center items-center border-b-2 border-blue-600 ">
+  <div className="py-16 pl-4 pr-12 md:px-20 relative gradient-blur">
+    <section className="flex  relative p-20 md:p-56 justify-center items-center border-b-2 border-blue-600 ">
       <div className="flex md:flex-row flex-col justify-center items-center">
         <div className="text-5xl md:text-6xl cursor-pointer shiny text-black">Create.</div>
         <div className="text-5xl md:text-6xl cursor-pointer shiny text-black">Innovate.</div>

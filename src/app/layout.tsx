@@ -33,7 +33,7 @@ export default function RootLayout({
         <div className="bg-black">
 
         <Header/>
-        <div className="fixed z-50 bottom-4 left-4">
+        <div className="md:block hidden fixed z-50 bottom-4 left-4">
           <FloatingButtons/>
         </div>
         <div className="mb-4">
