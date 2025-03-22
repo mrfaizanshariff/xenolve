@@ -1,47 +1,29 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "./components/Header/header";
-import Footer from "./components/Header/Footer";
-import FloatingButtons from "./components/Header/FloatingButtons";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import { BackgroundAnimations } from '@/components/background-animations';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Xenolve",
-  description: "Website, custom website, custom software, software services, mysore, college projects, social media marketing",
+  title: 'Xenolve - Digital Innovation Agency',
+  description: 'Transform your digital presence with Xenolve - Your partner in innovative web solutions',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="bg-black">
-
-        <Header/>
-        <div className="md:block hidden fixed z-50 bottom-4 left-4">
-          <FloatingButtons/>
-        </div>
-        <div className="mb-4">
+      <body className={inter.className}>
+        <BackgroundAnimations />
+        <Navbar />
         {children}
-
-        </div>
-        <Footer/>
-        </div>
+        <Footer />
       </body>
     </html>
   );
