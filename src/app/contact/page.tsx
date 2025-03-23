@@ -12,10 +12,42 @@ export default function Contact() {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  
+  const [messageText,setMessageText] = useState("Send Message")
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
+    setMessageText("Sending...")
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+      },
+      body: JSON.stringify({
+          access_key: "3f012b44-c25f-46af-a928-a3f36713290f",
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: "Leads From Xenolve.com",
+      }),
+  });
+  const result = await response.json();
+  if (result.success) {
+      console.log(result);
+      setMessageText("Send Message")
+      setFormData({ name: '',
+    email: '',
+    subject: '',
+    message: ''})
+  }
     console.log(formData);
+    setMessageText("Send Message")
+    setFormData({ name: '',
+    email: '',
+    subject: '',
+    message: ''})
   };
 
   return (
@@ -46,9 +78,9 @@ export default function Contact() {
             <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-8 border border-white/10">
               <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
               <div className="space-y-6">
-                <ContactInfo icon={<Mail />} title="Email" info="hello@xenolve.com" />
-                <ContactInfo icon={<Phone />} title="Phone" info="+1 (555) 123-4567" />
-                <ContactInfo icon={<MapPin />} title="Location" info="123 Innovation Street, Tech City, TC 12345" />
+                <ContactInfo icon={<Mail />} title="Email" info="admin@xenolve.com" />
+                <ContactInfo icon={<Phone />} title="Phone" info="+91 7338006388" />
+                <ContactInfo icon={<MapPin />} title="Location" info="India" />
               </div>
             </div>
           </div>
@@ -107,7 +139,7 @@ export default function Contact() {
                 whileTap={{ scale: 0.98 }}
                 className="w-full bg-[#5C24FF] hover:bg-[#4a1dd6] text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2"
               >
-                Send Message
+                {messageText}
                 <Send size={18} />
               </motion.button>
             </div>

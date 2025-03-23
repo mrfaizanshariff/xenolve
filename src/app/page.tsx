@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, BookCheck, Bot, BotMessageSquareIcon, Code, Computer, Globe, Palette, Rocket, School, ShoppingBag } from 'lucide-react';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,7 +65,10 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className="bg-[#5C24FF] hover:bg-[#4a1dd6] text-white mt-3 px-8 py-4 rounded-full font-medium flex items-center gap-2 mx-auto"
             >
+              <Link href="/contact">
+              
               Get Started
+              </Link>
               <ArrowRight size={20} />
             </motion.button>
           </motion.div>
@@ -76,7 +80,7 @@ export default function Home() {
         <h2 className="text-4xl font-bold text-center mb-16">
           About <span className="gradient-text">XENOLVE</span>
         </h2>
-        <div className="md:flex flex-col gap-4">
+        <div className="md:flex md:flex-row flex-col gap-4">
         <div className='font-["normal-bold-font"] glass-card flex-1 p-8 rounded-2xl text-3xl '>
           <p className="text-gray-50">
           At

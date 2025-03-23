@@ -18,8 +18,11 @@ import {
   ShoppingCart,
   BotMessageSquareIcon,
   BotMessageSquare,
-  BrainCircuit
+  BrainCircuit,
+  ArrowRight,
+  ExternalLink
 } from 'lucide-react';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -207,6 +210,27 @@ export default function Services() {
             />
           </div>
         </div>
+
+        {/* Call To Action Section */}
+        <div className="backdrop-blur-xl bg-white/5 my-6 rounded-3xl p-12 text-center border border-white/10">
+          <h2 className="text-3xl font-bold mb-6">Ready to Start Your Project?</h2>
+          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+            Let's collaborate to bring your digital vision to life. Our team is ready to help you create something amazing.
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-[#5C24FF] hover:bg-[#4a1dd6] text-white px-8 py-4 rounded-full font-medium inline-flex items-center gap-2"
+          >
+            <Link href="/contact">
+            
+            Get in Touch
+            
+            </Link>
+            <ExternalLink size={20} />
+          </motion.button>
+        </div>
+
       </div>
     </main>
   );

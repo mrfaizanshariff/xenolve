@@ -4,7 +4,8 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Users, Trophy, Globe, Lightbulb } from 'lucide-react';
+import { Users, Trophy, Globe, Lightbulb, ArrowRight, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -97,6 +98,50 @@ export default function About() {
             <p className="text-gray-400 ">At XENOLVE, we don’t just develop software—we create impact.</p>
             </div>
           </div>
+        </div>
+
+        <div className='glass-card rounded-2xl p-8 my-12'>
+          <h1 className='text-3xl md:text-4xl text-white mb-6 font-bold'>WHY CHOOSE US?</h1>
+          <ul className="space-y-2">
+            {
+              [
+                "Precise Business Solutions – We don’t believe in one-size-fits-all. Our solutions are custom-built for your needs.",
+
+                "AI for Everyone – We simplify AI technology, making it accessible and affordable for all businesses.",
+
+                "Industry-Focused Learning – Our education programs go beyond theory, ensuring students learn what’s actually used in the industry.",
+
+                "Scalable & Future-Proof Tech – We build with scalability and longevity in mind, so your business stays ahead of the curve.",
+
+                "Expert-Led Development – Our team consists of experienced developers, AI engineers, and business strategists committed to innovation."
+              ].map((e,i)=>
+                <li key={i} className="text-md font-normal text-gray-400 flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#5C24FF]" />
+                {e}
+              </li>
+              )
+            }
+          </ul>
+        </div>
+
+          {/* Call To Action Section */}
+        <div className="backdrop-blur-xl bg-white/5 my-6 rounded-3xl p-12 text-center border border-white/10">
+          <h2 className="text-3xl font-bold mb-6">Ready to Start Your Project?</h2>
+          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+            Let's collaborate to bring your digital vision to life. Our team is ready to help you create something amazing.
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-[#5C24FF] hover:bg-[#4a1dd6] text-white px-8 py-4 rounded-full font-medium inline-flex items-center gap-2"
+          >
+            <Link href="/contact">
+            
+            Get in Touch
+            
+            </Link>
+            <ExternalLink size={20} />
+          </motion.button>
         </div>
       </div>
     </main>

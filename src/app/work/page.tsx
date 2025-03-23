@@ -6,37 +6,53 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 const projects = [
   {
-    title: "E-commerce Platform",
+    title: "Drone Light Show | 3D Projection Mapping company ",
     category: "Web Development",
-    description: "A modern e-commerce platform built with Next.js and Shopify",
-    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    description: "Brand Website completely built in HTML,CSS and JavaScript without any frameworks",
+    image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "https://studiotrika.com/"
   },
   {
-    title: "Banking App",
-    category: "Mobile Development",
-    description: "Secure and intuitive mobile banking application",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    title: "Dynamic Real-estate Company",
+    category: "Web Development",
+    description: "Brand Website built in WordPress and conversational Chat-bot",
+    image: "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "https://vibezestates.com/"
   },
   {
-    title: "Healthcare Platform",
+    title: "A Financial Services Company Based In Dubai",
     category: "Web Application",
-    description: "Telemedicine platform connecting patients with healthcare providers",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    description: "Brand Website Built in Angular-16, Website Design, Website Content",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "https://www.gulfex.co/"
   },
   {
-    title: "Real Estate Portal",
-    category: "Web Development",
-    description: "Property listing and management platform",
-    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    title: "A Premium Clothing Brand",
+    category: "E-Commerce Development",
+    description: "End to end E-commerce website built in custom shopify theme along with email and whatsapp marketing",
+    image: "https://images.unsplash.com/photo-1614231125961-38323d6c485b?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "https://shop.threaddrop.in/"
+  },
+  {
+    title: "WhatsApp Bot to handle delivery",
+    category: "Custom Software Development",
+    description: "We Built a custom whatsapp bot that handles delivery system by giving the delivery personnel the customer details (location,orderId,contact,Image) when the delivery personnel sends a message to the Bot",
+    image: "https://images.unsplash.com/photo-1633675254245-efd890d087b8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "/work"
+  },
+  {
+    title: "Order Management System",
+    category: "Custom Software Development",
+    description: "We built a custom software in NextJs to handle very specific features for a booking system applicaion",
+    image: "https://images.unsplash.com/photo-1595675024853-0f3ec9098ac7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "/work"
   }
 ];
 
@@ -100,7 +116,11 @@ export default function Work() {
             whileTap={{ scale: 0.95 }}
             className="bg-[#5C24FF] hover:bg-[#4a1dd6] text-white px-8 py-4 rounded-full font-medium inline-flex items-center gap-2"
           >
+            <Link href="/contact">
+            
             Get in Touch
+            
+            </Link>
             <ExternalLink size={20} />
           </motion.button>
         </div>
@@ -139,12 +159,13 @@ function ProjectCard({
         <div className="text-sm text-[#5C24FF] mb-2">{category}</div>
         <h3 className="text-2xl font-bold mb-4">{title}</h3>
         <p className="text-gray-400 mb-6">{description}</p>
-        <a 
+        <Link 
           href={link}
+          target='_blank'
           className="inline-flex items-center gap-2 text-white hover:text-[#5C24FF] transition-colors"
         >
           View Project <ExternalLink size={18} />
-        </a>
+        </Link>
       </div>
     </motion.div>
   );
