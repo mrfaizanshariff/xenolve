@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Github, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Twitter, Linkedin, Instagram, X } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -21,11 +21,11 @@ export function Footer() {
               Xenolve
             </Link>
             <p className="text-gray-400 mb-6">
-              Transforming ideas into digital reality. We create innovative solutions that drive business growth.
+            Revolutionizing Businesses with Cutting-Edge Technology.
             </p>
             <div className="flex space-x-4">
               <SocialLink href="#" icon={<Github className="w-5 h-5" />} />
-              <SocialLink href="#" icon={<Twitter className="w-5 h-5" />} />
+              <SocialLink href="#" icon={<X className="w-5 h-5" />} />
               <SocialLink href="#" icon={<Linkedin className="w-5 h-5" />} />
               <SocialLink href="#" icon={<Instagram className="w-5 h-5" />} />
             </div>
@@ -35,10 +35,11 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-6">Services</h3>
             <ul className="space-y-3">
               <FooterLink href="/services">Web Development</FooterLink>
-              <FooterLink href="/services">UI/UX Design</FooterLink>
-              <FooterLink href="/services">Mobile Development</FooterLink>
-              <FooterLink href="/services">Cloud Solutions</FooterLink>
-              <FooterLink href="/services">Digital Marketing</FooterLink>
+              <FooterLink href="/services">E-Commerce Website</FooterLink>
+              <FooterLink href="/services">Custom Software</FooterLink>
+              <FooterLink href="/services">AI Chatbots and AI Agents</FooterLink>
+              <FooterLink href="/services">College Projects</FooterLink>
+              <FooterLink href="/services">Coding Programs</FooterLink>
             </ul>
           </div>
 
@@ -48,7 +49,6 @@ export function Footer() {
               <FooterLink href="/about">About Us</FooterLink>
               <FooterLink href="/work">Our Work</FooterLink>
               <FooterLink href="/contact">Contact</FooterLink>
-              <FooterLink href="#">Careers</FooterLink>
               <FooterLink href="#">Blog</FooterLink>
             </ul>
           </div>
@@ -58,15 +58,18 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-[#5C24FF]" />
-                hello@xenolve.com
+                admin@xenolve.com
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Phone className="w-5 h-5 text-[#5C24FF]" />
-                +1 (555) 123-4567
+                <Link href="tel:+917338006388">
+                +91 7338006388
+                </Link>
+                
               </li>
               <li className="flex items-start gap-3 text-gray-400">
                 <MapPin className="w-5 h-5 text-[#5C24FF]" />
-                123 Innovation Street,<br />Tech City, TC 12345
+                INDIA
               </li>
             </ul>
           </div>

@@ -23,11 +23,36 @@
   --input: 240 4% 16%;
   --ring: 263 90% 51%;
 }
+@font-face {
+  font-family: 'light-font';
+  src: url('../../public/fonts/lightest.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'normal-font';
+  src: url('../../public/fonts/normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'normal-bold-font';
+  src: url('../../public/fonts/normal_bold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'bold-font';
+  src: url('../../public/fonts/bold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
 
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   overflow-x: hidden;
+  font-family: 'normal-font',sans-serif;
 }
 
 .gradient-text {
@@ -92,7 +117,7 @@ body {
 /* Glass Effect Enhancements */
 .glass-card {
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }

@@ -55,40 +55,46 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-3xl mx-auto"
+            
           >
-            We're a team of innovators, designers, and developers passionate about creating digital experiences that transform businesses.
+            <span className="text-xl text-gray-100 mb-4 max-w-3xl mx-auto">
+            Empowering Businesses & Individuals with Future-Ready Technology
+            </span> 
+            <p  className="text-md text-gray-400 max-w-3xl mx-auto">
+            At <span className="gradient-text">XENOLVE</span>, we believe technology should be a growth enabler, not a barrier. Our mission is to provide precise, industry-grade tech solutions that businesses need to thrive in a competitive market. We don’t offer generic software; we tailor solutions that match your business’s exact requirements.
+            </p>
           </motion.p>
         </div>
 
         {/* Stats Section */}
-        <div ref={statsRef} className="grid md:grid-cols-4 gap-6 mb-20">
+        {/* <div ref={statsRef} className="grid md:grid-cols-4 gap-6 mb-20">
           <StatCard icon={<Users />} number="50+" text="Team Members" />
           <StatCard icon={<Trophy />} number="200+" text="Projects Completed" />
           <StatCard icon={<Globe />} number="20+" text="Countries Served" />
           <StatCard icon={<Lightbulb />} number="15+" text="Years Experience" />
-        </div>
+        </div> */}
 
         {/* Content Section */}
         <div ref={contentRef} className="content-block backdrop-blur-xl bg-white/5 rounded-3xl p-8 md:p-12 mb-20">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Our Vision</h2>
+              <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
               <p className="text-gray-400 mb-6">
-                To be the catalyst for digital transformation, empowering businesses to thrive in the digital age through innovative solutions and cutting-edge technology.
-              </p>
+             <strong>Bringing Cutting-Edge Technology to Every Business</strong> – Whether you're a startup, an established enterprise, or a solopreneur, we help you leverage the right technology to streamline operations and increase efficiency.              </p>
+              <p className="text-gray-400 mb-6">
+              <strong>Making AI & Advanced Tech Accessible </strong>– AI shouldn’t be a luxury for large corporations. We aim to make AI-powered solutions available to businesses of all sizes, helping them scale effortlessly with automation and intelligent systems.              </p>
               <p className="text-gray-400">
-                We believe in pushing boundaries and challenging the status quo to deliver exceptional results that drive real business value.
-              </p>
+              <strong>Educating the Next Generation of Tech Professionals </strong>– We bridge the gap between academic knowledge and real-world industry practices. Our coding education programs are designed to equip students with in-demand skills used in professional development today.</p>
+            
             </div>
             <div>
-              <h2 className="text-3xl font-bold mb-6">Our Approach</h2>
+              <h2 className="text-3xl font-bold mb-6">Our Vision</h2>
               <p className="text-gray-400 mb-6">
-                We combine strategic thinking with technical expertise to create solutions that are not just beautiful but also highly functional and scalable.
-              </p>
-              <p className="text-gray-400">
-                Our agile methodology ensures transparent communication and rapid delivery while maintaining the highest quality standards.
-              </p>
+              Technology should be an enabler, not an obstacle. We envision a world where every business, no matter the size, has access to the same powerful technology as the biggest enterprises.              </p>
+              <p className="text-gray-400 mb-6">
+              Education should create builders, not just job seekers. We want students and professionals to think like developers and innovators, understanding how technology solves real-world problems instead of just memorizing syntax.              </p>
+            <p className="text-gray-400 mb-6">The future belongs to those who innovate. Our goal is to equip businesses with the right tech and empower individuals to build the next generation of digital solutions.</p>
+            <p className="text-gray-400 ">At XENOLVE, we don’t just develop software—we create impact.</p>
             </div>
           </div>
         </div>

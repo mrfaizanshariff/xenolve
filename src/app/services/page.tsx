@@ -13,7 +13,12 @@ import {
   Shield, 
   LineChart,
   Cloud,
-  Search
+  Search,
+  Code2,
+  ShoppingCart,
+  BotMessageSquareIcon,
+  BotMessageSquare,
+  BrainCircuit
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -49,6 +54,7 @@ export default function Services() {
             className="text-5xl md:text-7xl font-bold mb-6"
           >
             Our <span className="gradient-text">Services</span>
+            <p className='text-2xl md:text-4xl font-bold my-2'>Empowering Businesses with Smart, Scalable, and AI-Driven Solutions</p>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -56,79 +62,124 @@ export default function Services() {
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-400 max-w-3xl mx-auto"
           >
-            Comprehensive digital solutions tailored to transform your business and drive growth
-          </motion.p>
+          At <span className='gradient-text'> XENOLVE</span>, we specialize in custom-built digital solutions that enhance efficiency, boost productivity, and drive business growth. Whether you're an entrepreneur, a growing business, or a student looking to learn industry-grade tech, we’ve got you covered.          </motion.p>
         </div>
 
         {/* Services Grid */}
-        <div ref={servicesRef} className="grid md:grid-cols-3 gap-8 mb-20">
-          <ServiceCard
-            icon={<Code />}
-            title="Web Development"
-            description="Custom web applications built with cutting-edge technologies for optimal performance and scalability."
-            features={[
-              "Full-stack Development",
-              "API Integration",
-              "Progressive Web Apps",
-              "E-commerce Solutions"
-            ]}
-          />
-          <ServiceCard
-            icon={<Palette />}
-            title="UI/UX Design"
-            description="User-centered design solutions that create engaging and intuitive digital experiences."
-            features={[
-              "User Research",
-              "Interface Design",
-              "Prototyping",
-              "Design Systems"
-            ]}
-          />
-          <ServiceCard
-            icon={<Smartphone />}
-            title="Mobile Development"
-            description="Native and cross-platform mobile applications that deliver exceptional user experiences."
-            features={[
-              "iOS Development",
-              "Android Development",
-              "React Native",
-              "Flutter"
-            ]}
-          />
-          <ServiceCard
-            icon={<Cloud />}
-            title="Cloud Solutions"
-            description="Scalable cloud infrastructure and services for modern digital operations."
-            features={[
-              "Cloud Migration",
-              "DevOps",
-              "Serverless Architecture",
-              "Cloud Security"
-            ]}
-          />
-          <ServiceCard
-            icon={<Shield />}
-            title="Cybersecurity"
-            description="Comprehensive security solutions to protect your digital assets and data."
-            features={[
-              "Security Audits",
-              "Penetration Testing",
-              "Compliance",
-              "Security Training"
-            ]}
-          />
-          <ServiceCard
-            icon={<Search />}
-            title="Digital Marketing"
-            description="Strategic digital marketing solutions to boost your online presence and reach."
-            features={[
-              "SEO Optimization",
-              "Content Strategy",
-              "Social Media",
-              "Analytics"
-            ]}
-          />
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {
+            [
+              {
+                title:" Web Development",
+                icon:Code2,
+                subTitle:"– Scalable & High-Performance Websites",
+                desc:"We create fast, secure, and user-friendly websites that help businesses establish a strong online presence.",
+                features:[
+                  "Custom Websites (Portfolio, Business, Landing Pages)",
+                  "Scalable Web Applications (Dashboard, SaaS, CRM)",
+                  "Progressive Web Apps (PWA) for mobile-like experience",
+                  "SEO Optimization & Speed Enhancement",
+                  "Maintenance & Performance Monitoring"
+                ]
+              },
+              {
+                title:"Custom Software Development",
+                icon:Code,
+                subTitle:" – Tailor-Made Solutions for Your Business",
+                desc:"We don’t sell generic software—we build solutions that fit your business like a glove",
+                features:[
+                  "Enterprise Software (CRM, ERP, HRMS)",
+                  "Booking & Scheduling Systems",
+                  "Inventory & Warehouse Management",
+                  "AI-driven Automation for Business Processes",
+                  "Custom Dashboard & Reporting Systems"
+                ]
+              },
+              {
+                title:"E-commerce Solutions",
+                icon:ShoppingCart,
+                subTitle:"– Sell Smart, Scale Fast",
+                desc:"We build seamless online stores with a focus on conversions, user experience, and automation.",
+                features:[
+                  "Shopify Development & Customization",
+                  "Headless E-commerce (Shopify + Angular, React, Vue)",
+                  "Payment Gateway & Order Management System",
+                  "AI-powered Product Recommendations & Chatbots",
+                  "Multi-vendor Marketplaces & Subscription Models"
+                ]
+              },
+              {
+                title:"AI Chatbots & AI Agents",
+                icon:BotMessageSquare,
+                subTitle:"–  Automate Customer Support & Operations",
+                desc:"We develop smart AI chatbots and virtual assistants that can handle customer interactions, automate tasks, and save you time.",
+                features:[
+                  "AI Chatbots for WhatsApp, Websites & Social Media",
+                  "Voice Assistants & NLP-based Virtual Agents",
+                  "AI-Powered Support & Lead Generation Bots",
+                  "Integration with CRM, E-commerce & Business Tools",
+                  "Self-Learning AI Agents that Improve Over Time"
+                ]
+              },
+              {
+                title:" AI-Based Software",
+                icon:BrainCircuit,
+                subTitle:"– Smart Technology for Smarter Businesses",
+                desc:"We integrate Artificial Intelligence into business operations, enabling automation, analytics, and data-driven decision-making.",
+                features:[
+                  "AI-powered Data Analytics & Forecasting",
+                  "Machine Learning Solutions for Process Automation",
+                  "AI-driven Content & Image Generation Tools",
+                  "Smart Recommendation Systems for E-commerce & Media",
+                  "Personalized AI Assistants for Business Growth"
+                ]
+              },
+              {
+                title:" College Projects & Final-Year Assistance",
+                icon:Code2,
+                subTitle:"– Industry-Grade Academic Projects",
+                desc:"We help students build real-world tech projects that impress professors and recruiters alike.",
+                features:[
+                  "Final-Year Projects in AI, Web Dev, Mobile Apps, Blockchain",
+                  "Project Documentation & Code Explanation",
+                  "Hands-on Guidance & Mentorship",
+                  "Custom Research-Based Tech Solutions",
+                  "Interview & Placement Assistance for IT Jobs"
+                ]
+              },
+              {
+                title:"Coding Education & Industry Training",
+                icon:Code2,
+                subTitle:"– Learn What the Industry Uses",
+                desc:"We teach real-world coding skills, preparing students and professionals to build applications that are actually used in the industry.",
+                features:[
+                  "Frontend Development: HTML, CSS, JavaScript, TypeScript, Angular, React",
+                  "Backend Development: Node.js, Firebase, APIs, Databases",
+                  "AI & Machine Learning: Python, TensorFlow, NLP, AI Chatbot Development",
+                  "E-commerce & SaaS Development",
+                  "Project-Based Learning with Hands-on Coding"
+                ]
+              },
+            ].map((service,index)=>
+              <motion.div 
+              whileHover={{ y: -5 }}
+              className="service-card backdrop-blur-xl bg-white/5 rounded-2xl p-8 border border-white/10"
+            >
+              <div className="text-[#5C24FF] mb-6"><service.icon/></div>
+              <h3 className="text-2xl font-bold mb-4">{service.title}<span className="text-lg text-gray-300 font-bold mb-4">{service.subTitle}</span></h3>
+              <p className="text-gray-400 mb-6">{service.desc}</p>
+              <ul className="space-y-2">
+                {service.features.map((feature, index) => (
+                  <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#5C24FF]" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>)
+          }
         </div>
+        
 
         {/* Process Section */}
         <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-12 border border-white/10">

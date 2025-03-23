@@ -29,10 +29,10 @@ export function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink href="services">Services</NavLink>
-            <NavLink href="work">Work</NavLink>
-            <NavLink href="about">About</NavLink>
-            <NavLink href="contact">Contact</NavLink>
+            <NavLink href="/services">Services</NavLink>
+            <NavLink href="/work">Work</NavLink>
+            <NavLink href="/about">About</NavLink>
+            <NavLink href="/contact">Contact</NavLink>
           </div>
 
           <button
@@ -54,16 +54,16 @@ export function Navbar() {
         >
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-col space-y-4">
-              <MobileNavLink href="#services" onClick={() => setIsOpen(false)}>
+              <MobileNavLink href="/services" onClick={() => setIsOpen(false)}>
                 Services
               </MobileNavLink>
-              <MobileNavLink href="#work" onClick={() => setIsOpen(false)}>
+              <MobileNavLink href="/work" onClick={() => setIsOpen(false)}>
                 Work
               </MobileNavLink>
-              <MobileNavLink href="#about" onClick={() => setIsOpen(false)}>
+              <MobileNavLink href="/about" onClick={() => setIsOpen(false)}>
                 About
               </MobileNavLink>
-              <MobileNavLink href="#contact" onClick={() => setIsOpen(false)}>
+              <MobileNavLink href="/contact" onClick={() => setIsOpen(false)}>
                 Contact
               </MobileNavLink>
             </div>

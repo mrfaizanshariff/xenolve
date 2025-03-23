@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Code, Palette, Rocket } from 'lucide-react';
+import { ArrowRight, BookCheck, Bot, BotMessageSquareIcon, Code, Computer, Globe, Palette, Rocket, School, ShoppingBag } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,15 +51,18 @@ export default function Home() {
             className="max-w-4xl mx-auto text-center"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              We Create <span className="gradient-text">Digital Experiences</span> That Matter
+              Create. <span className="gradient-text">Innovate. Teach</span>
             </h1>
             <p className="text-xl text-gray-400 mb-8">
-              Transform your brand with cutting-edge web solutions that drive growth and engagement
+            At XENOLVE, we bridge the gap between innovative technology and business success. Whether it’s AI-driven automation, e-commerce solutions, or custom software, we empower businesses to scale efficiently and thrive in the digital era.
+            </p>
+            <p className="text-lg gradient-text">
+            Web Development | E-commerce | AI Chatbots | AI Agents | Custom Software | College Projects | Coding Education
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#5C24FF] hover:bg-[#4a1dd6] text-white px-8 py-4 rounded-full font-medium flex items-center gap-2 mx-auto"
+              className="bg-[#5C24FF] hover:bg-[#4a1dd6] text-white mt-3 px-8 py-4 rounded-full font-medium flex items-center gap-2 mx-auto"
             >
               Get Started
               <ArrowRight size={20} />
@@ -68,50 +71,110 @@ export default function Home() {
         </div>
       </div>
 
+      {/* About Section */}
+      <section className="py-20 container mx-auto px-4" id="services">
+        <h2 className="text-4xl font-bold text-center mb-16">
+          About <span className="gradient-text">XENOLVE</span>
+        </h2>
+        <div className="md:flex flex-col gap-4">
+        <div className='font-["normal-bold-font"] glass-card flex-1 p-8 rounded-2xl text-3xl '>
+          <p className="text-gray-50">
+          At
+          <span className="gradient-text"> XENOLVE </span>
+          we believe technology should be accessible to all businesses—from startups to enterprises. Our team of experienced developers, AI engineers, and educators is committed to pushing the boundaries of innovation and delivering cutting-edge solutions that solve real-world problems.
+          </p>
+
+        </div>
+        <div className="glass-card p-8 rounded-2xl flex flex-[0.7] flex-col justify-around text-lg ">
+          <p className="text-gray-400"> <span className="gradient-text">Our Vision: </span> To make businesses smarter, faster, and more efficient with future-ready technology.</p>
+          <h3 className="text-xl font-bold mb-2">Why Choose Us?</h3>
+          <ul>
+            {
+              [
+                {
+                  text:"✔ Industry Experts in AI & Software Development"
+
+                },
+                {
+                  text:"✔ Scalable & Future-Proof Solutions"
+                },
+                {
+                  text:"✔ Transparent Communication & Support"
+                },
+                {
+                  text:"✔ Affordable & Customizable Pricing"
+                }
+              ].map((item,i)=>
+              <li key={i}>{item.text}</li>)
+            }
+          </ul>
+        </div>
+        </div>  
+        
+      </section>
       {/* Services Section */}
-      <section ref={servicesRef} className="py-20 container mx-auto px-4" id="services">
+      <section  className="py-20 container mx-auto px-4" id="services">
         <h2 className="text-4xl font-bold text-center mb-16">
           Our <span className="gradient-text">Services</span>
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
-          <ServiceCard
-            icon={<Palette className="w-8 h-8 text-[#FF3BFF]" />}
-            title="UI/UX Design"
-            description="Create intuitive and engaging user experiences that convert visitors into customers."
-          />
-          <ServiceCard
-            icon={<Code className="w-8 h-8 text-[#5C24FF]" />}
-            title="Web Development"
-            description="Build scalable and performant web applications using cutting-edge technologies."
-          />
-          <ServiceCard
-            icon={<Rocket className="w-8 h-8 text-[#0096FF]" />}
-            title="Digital Strategy"
-            description="Develop comprehensive digital strategies to achieve your business goals."
-          />
+          {
+            [
+              {
+                icon:Globe,iconClass:"w-8 h-8 text-[#FF3BFF]" , title:'Web Development ',description:'Fast, secure, and scalable websites tailored for your brand.',
+              },
+              {
+                icon:ShoppingBag,iconClass:"w-8 h-8 text-[#FF3BFF]" , title:'E-commerce Solutions',description:'Seamless online stores with top-tier user experience and conversions.',
+              },
+              {
+                icon:Computer,iconClass:"w-8 h-8 text-[#FF3BFF]" , title:'Custom Software Development ',description:'Business-specific software solutions to streamline operations.',
+              },
+              {
+                icon:Bot,iconClass:"w-8 h-8 text-[#FF3BFF]" , title:' AI Chatbots & AI Agents ',description:'Intelligent, conversational AI to enhance customer support and automation.',
+              },
+              {
+                icon:BotMessageSquareIcon,iconClass:"w-8 h-8 text-[#FF3BFF]" , title:'AI-Based Software ',description:' Leverage artificial intelligence to optimize business efficiency and decision-making.',
+              },
+              {
+                icon:BookCheck,iconClass:"w-8 h-8 text-[#FF3BFF]" , title:'College Projects  ',description:'High-quality academic projects backed by industry expertise.',
+              },
+              {
+                icon:School,iconClass:"w-8 h-8 text-[#FF3BFF]" , title:'Coding Education ',description:'Learn to build real-world applications with our expert coding programs.',
+              },
+            ].map((service,index) =>
+              <div key={index} className='glass-card  p-8 rounded-2xl'>
+                <div className="mb-6">
+                  <service.icon className={`${service.iconClass}`} />
+                  </div>
+                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+                <p className="text-gray-400">{service.description}</p>
+              </div>)
+          }
+          
         </div>
       </section>
     </main>
   );
 }
 
-function ServiceCard({
+{/* function ServiceCard({
   icon,
   title,
   description
 }: {
-  icon: React.ReactNode;
+  icon: any;
   title: string;
+  classname:string;
   description: string;
 }) {
   return (
     <motion.div
       whileHover={{ y: -10 }}
-      className="service-card bg-secondary p-8 rounded-2xl border border-gray-800"
+      className="service-card glass-card  p-8 rounded-2xl "
     >
       <div className="mb-6">{icon}</div>
       <h3 className="text-2xl font-bold mb-4">{title}</h3>
       <p className="text-gray-400">{description}</p>
     </motion.div>
   );
-}
+} */}
