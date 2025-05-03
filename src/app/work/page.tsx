@@ -27,6 +27,13 @@ const projects = [
     link: "https://vibezestates.com/"
   },
   {
+    title: "A Jungle Resort",
+    category: "Web Development, Web Design",
+    description: "Brand Website built in NextJs",
+    image: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    link: "https://wildearthjunglecamp.com/"
+  },
+  {
     title: "A Financial Services Company Based In Dubai",
     category: "Web Application",
     description: "Brand Website Built in Angular-16, Website Design, Website Content",
@@ -38,7 +45,7 @@ const projects = [
     category: "E-Commerce Development",
     description: "End to end E-commerce website built in custom shopify theme along with email and whatsapp marketing",
     image: "https://images.unsplash.com/photo-1614231125961-38323d6c485b?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://shop.threaddrop.in/"
+    link: "https://wwww.threaddrop.in/"
   },
   {
     title: "WhatsApp Bot to handle delivery",
