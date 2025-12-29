@@ -58,7 +58,9 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-[#5C24FF]" />
-                admin@xenolve.com
+                 <Link href="mailto:mohammed.faizan@xenolve.com>
+                 mohammed.faizan@xenolve.com
+                </Link>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Phone className="w-5 h-5 text-[#5C24FF]" />
