@@ -15,7 +15,7 @@ const projects = [
   {
     title: "Drone Light Show | 3D Projection Mapping company ",
     category: "Web Development",
-    description: "Brand Website completely built in HTML,CSS and JavaScript without any frameworks",
+    description: "Brand Website completely built in HTML,CSS and JavaScript",
     image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     link: "https://studiotrika.com/"
   },
@@ -27,25 +27,25 @@ const projects = [
     link: "https://vibezestates.com/"
   },
   {
-    title: "A Jungle Resort",
+    title: "A Jungle Resort - Wild Earth Jungle Camp",
     category: "Web Development, Web Design",
     description: "Brand Website built in NextJs",
     image: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     link: "https://wildearthjunglecamp.com/"
   },
   {
-    title: "A Financial Services Company Based In Dubai",
+    title: "A Lighting Services Company Based In Saudi Arabia",
     category: "Web Application",
-    description: "Brand Website Built in Angular-16, Website Design, Website Content",
+    description: "Brand Website Built in NextJs, Website Design, Website Content, SEO",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://www.gulfex.co/"
+    link: "https://www.lightech.com.sa/"
   },
   {
-    title: "A Premium Clothing Brand",
+    title: "Thread Drop - A Premium Clothing Brand",
     category: "E-Commerce Development",
     description: "End to end E-commerce website built in custom shopify theme along with email and whatsapp marketing",
     image: "https://images.unsplash.com/photo-1614231125961-38323d6c485b?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://wwww.threaddrop.in/"
+    link: "https://www.threaddrop.in/"
   },
   {
     title: "WhatsApp Bot to handle delivery",
