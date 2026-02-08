@@ -7,7 +7,7 @@ interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 
 export function Heading({ children, level = 2, className, ...props }: HeadingProps) {
-    const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+    const Tag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
     const baseStyles = "font-bold tracking-tight text-foreground";
 
@@ -21,7 +21,7 @@ export function Heading({ children, level = 2, className, ...props }: HeadingPro
     };
 
     return (
-        <Tag className={cn(baseStyles, sizes[level], className)} {...props}>
+        <Tag className={cn(baseStyles, sizes[level as keyof typeof sizes], className)} {...props}>
             {children}
         </Tag>
     );
