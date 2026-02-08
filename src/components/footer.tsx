@@ -21,7 +21,7 @@ export function Footer() {
               Xenolve
             </Link>
             <p className="text-gray-400 mb-6">
-            Revolutionizing Businesses with Cutting-Edge Technology.
+              Revolutionizing Businesses with Cutting-Edge Technology.
             </p>
             <div className="flex space-x-4">
               <SocialLink href="#" icon={<Github className="w-5 h-5" />} />
@@ -34,12 +34,12 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">Services</h3>
             <ul className="space-y-3">
-              <FooterLink href="/services">Web Development</FooterLink>
-              <FooterLink href="/services">E-Commerce Website</FooterLink>
-              <FooterLink href="/services">Custom Software</FooterLink>
-              <FooterLink href="/services">AI Chatbots and AI Agents</FooterLink>
-              <FooterLink href="/services">College Projects</FooterLink>
-              <FooterLink href="/services">Coding Programs</FooterLink>
+              <FooterLink href="/services">• Custom Software Development</FooterLink>
+              <FooterLink href="/services">• Web Application Development</FooterLink>
+              <FooterLink href="/services">• AI & Automation Solutions</FooterLink>
+              <FooterLink href="/services">• Shopify eCommerce Development</FooterLink>
+              <FooterLink href="/services">• Mobile App Development</FooterLink>
+              <FooterLink href="/services">• Product Engineering & Consulting</FooterLink>
             </ul>
           </div>
 
@@ -58,16 +58,16 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-[#5C24FF]" />
-                 <Link href="mailto:mohammed.faizan@xenolve.com>
-                 mohammed.faizan@xenolve.com
+                <Link href="mailto:mohammed.faizan@xenolve.com">
+                  mohammed.faizan@xenolve.com
                 </Link>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Phone className="w-5 h-5 text-[#5C24FF]" />
                 <Link href="tel:+917338006388">
-                +91 7338006388
+                  +91 7338006388
                 </Link>
-                
+
               </li>
               <li className="flex items-start gap-3 text-gray-400">
                 <MapPin className="w-5 h-5 text-[#5C24FF]" />
@@ -88,8 +88,8 @@ export function Footer() {
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <li>
-      <Link 
-        href={href} 
+      <Link
+        href={href}
         className="text-gray-400 hover:text-white transition-colors duration-200"
       >
         {children}
