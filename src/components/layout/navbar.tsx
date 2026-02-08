@@ -80,6 +80,8 @@ export function Navbar() {
                         </Link>
                     ))}
                     <Button className="w-full">Get Started</Button>
+                    <ThemeToggle></ThemeToggle>
+
                 </div>
             )}
         </header>
