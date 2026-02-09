@@ -7,10 +7,27 @@ import { Badge } from "@/components/ui/badge";
 
 const TIERS = [
     {
-        name: "Starter",
-        price: "$2,500",
-        description: "Perfect for startups launching MVPs or proof-of-concept products.",
+        name: "E-Commerce Development",
+        price: "$1,500",
+        description: "For businesses looking to sell products online.",
+        popular: true,
         features: [
+            "Shopify Setup",
+            "Product Listing",
+            "Payment Gateway Integration",
+            "Custom Theme Development",
+            "Performance Optimization",
+            "Analytics Dashboard",
+            "3 Months Support"
+        ],
+    },
+    {
+        name: "Web Development",
+        price: "$2,000",
+        popular: true,
+        description: "Perfect for startups launching MVPs, small businesses, and personal websites.",
+        features: [
+            "Unlimited Pages",
             "Custom Web Design",
             "Mobile Responsive",
             "Basic SEO Setup",
@@ -18,23 +35,25 @@ const TIERS = [
             "1 Month Support"
         ],
     },
+
     {
-        name: "Growth",
-        price: "$5,000",
-        description: "For scaling businesses needing advanced features, integrations, and optimization.",
+        name: "Mobile App Development",
+        price: "$3,000",
         popular: true,
+        description: "For businesses looking to build a mobile app.",
         features: [
-            "Everything in Starter",
-            "Advanced Interactions",
-            "E-commerce Functionality",
-            "Performance Optimization",
-            "Analytics Dashboard",
+            "Native iOS & Android",
+            "Custom App Design",
+            "Push Notifications",
+            "In-App Purchases",
+            "App Store Submission",
             "3 Months Support"
         ],
     },
     {
         name: "Enterprise",
         price: "Custom",
+        popular: true,
         description: "Dedicated engineering teams, AI solutions, Shopify scale, and mission-critical software.",
         features: [
             "Everything in Growth",
@@ -61,7 +80,7 @@ export function Pricing() {
                         <Card key={tier.name} className={`relative flex flex-col ${tier.popular ? 'border-primary shadow-lg scale-105 z-10' : ''}`}>
                             {tier.popular && (
                                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                                    <Badge variant="default" className="bg-primary text-primary-foreground">Most Popular</Badge>
+                                    <Badge variant="default" className="bg-primary text-primary-foreground">Starting at</Badge>
                                 </div>
                             )}
                             <CardHeader>

@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { VoiceAssistantWidget } from '@/components/features/voice-assistant-widget';
 import { SITE_CONFIG } from '@/lib/constants';
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
