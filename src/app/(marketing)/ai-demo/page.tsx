@@ -21,7 +21,7 @@ import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { useSpeech } from '@/hooks/useSpeech';
 import { sendMessageToAI } from '@/lib/ai-client';
-import { trackEvent } from '@/lib/analytics';
+// import { trackEvent } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/ui/card';
 import { Mic, MicOff, Send, Volume2, VolumeX } from 'lucide-react';

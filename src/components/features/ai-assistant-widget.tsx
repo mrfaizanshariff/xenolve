@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSpeech } from '@/hooks/useSpeech';
 import { sendMessageToAI } from '@/lib/ai-client';
-import { trackEvent } from '@/lib/analytics';
+// import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -60,7 +60,7 @@ export function AIAssistantWidget() {
         // Add user message to UI
         setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
         setIsLoading(true);
-        trackEvent('ai_message_sent', { type: 'text' }); // or voice if applicable, but we send text content
+        // trackEvent('ai_message_sent', { type: 'text' }); // or voice if applicable, but we send text content
 
         try {
             const response = await sendMessageToAI(userMessage);
@@ -78,11 +78,11 @@ export function AIAssistantWidget() {
                 speak(assistantMessage);
             }
 
-            trackEvent('ai_message_received');
+            // trackEvent('ai_message_received');
 
         } catch (error) {
             console.error('Error sending message:', error);
-            trackEvent('ai_error', { message: 'Failed to send/receive' });
+            // trackEvent('ai_error', { message: 'Failed to send/receive' });
             setMessages((prev) => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }]);
         } finally {
             setIsLoading(false);
@@ -94,7 +94,7 @@ export function AIAssistantWidget() {
             stopListening();
         } else {
             startListening();
-            trackEvent('ai_demo_start', { method: 'voice' });
+            // trackEvent('ai_demo_start', { method: 'voice' });
             // If we stop listening manually, let's not auto-send yet, just fill input.
             // Or we can implement auto-send on silence logic in hook. 
             // For this widget, explicit send is safer for UX unless using advanced VAD.
