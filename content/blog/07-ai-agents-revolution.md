@@ -1,7 +1,7 @@
 ---
-title: "AI Agents Are Here: Why 2024 is the Year of Autonomous AI Workers"
+title: "AI Agents Are Here: Why 2025 is the Year of Autonomous AI Workers"
 description: "From coding assistants to customer service reps, AI agents are transforming how work gets done."
-date: "2024-03-23"
+date: "2025-12-23"
 coverImage: "https://images.unsplash.com/photo-1677756119517-756a188d2d94?auto=format&fit=crop&q=80&w=2000"
 tags: ["AI", "Agents", "Automation", "Tech News"]
 author:

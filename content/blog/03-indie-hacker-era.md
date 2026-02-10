@@ -1,7 +1,7 @@
 ---
 title: "The Indie Hacker Era: Building Profitable SaaS Solo in 2024"
 description: "Why now is the best time ever to build, launch, and scale a one-person software business."
-date: "2024-03-22"
+date: "2025-12-22"
 coverImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2000"
 tags: ["Indie Hacker", "SaaS", "Entrepreneurship", "Startup"]
 author:

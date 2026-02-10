@@ -46,9 +46,12 @@ export function VoiceAssistantWidget() {
                         <Button
                             onClick={() => setIsOpen(true)}
                             size="icon"
-                            className="h-14 w-14 rounded-full shadow-lg bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+                            className=" flex h-18 w-40 p-2 rounded-3xl shadow-lg bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
                             aria-label="Open Voice Assistant"
                         >
+                            <span className="text-white text-md">
+                                Try Our AI voice Agent
+                            </span>
                             <Mic className="h-6 w-6 text-primary-foreground" />
                         </Button>
                     </motion.div>

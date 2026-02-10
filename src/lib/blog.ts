@@ -7,6 +7,7 @@ import { BlogPost, BlogPostPreview } from '@/types/blog';
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
 
 export function getBlogPosts(): BlogPostPreview[] {
+    console.log('Generating static params for blog posts...');
     // Ensure directory exists
     console.log('Loading blog posts from:', BLOG_DIR);
     if (!fs.existsSync(BLOG_DIR)) {

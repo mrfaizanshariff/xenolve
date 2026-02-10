@@ -1,7 +1,7 @@
 ---
 title: "Gamifying Education: How Game Design is Making Learning Addictive"
 description: "Why students are spending hours on learning apps using the same psychology that makes games irresistible."
-date: "2024-03-24"
+date: "2025-12-24"
 coverImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=2000"
 tags: ["EdTech", "Gamification", "Learning", "Education"]
 author:

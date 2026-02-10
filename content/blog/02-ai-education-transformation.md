@@ -1,7 +1,7 @@
 ---
 title: "AI-Powered Learning: How Technology is Transforming Student Success"
 description: "Exploring the revolutionary impact of artificial intelligence on personalized learning and student outcomes."
-date: "2024-03-18"
+date: "2025-12-18"
 coverImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=2000"
 tags: ["AI", "Education", "EdTech", "Learning"]
 author:

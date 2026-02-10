@@ -1,7 +1,7 @@
 ---
-title: "Micro-SaaS Gold Rush: Finding Your $10K MRR Niche in 2024"
+title: "Micro-SaaS Gold Rush: Finding Your $10K MRR Niche in 2025"
 description: "Why building small, focused SaaS products for niche markets is the smartest move for indie hackers."
-date: "2024-03-17"
+date: "2025-12-17"
 coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000"
 tags: ["Micro-SaaS", "Indie Hacker", "Business", "Niche"]
 author:
