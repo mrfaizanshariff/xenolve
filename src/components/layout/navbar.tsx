@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -35,7 +36,7 @@ export function Navbar() {
         >
             <Container className="flex items-center justify-between">
                 <Link href="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                    {SITE_CONFIG.name}
+                    <Image src="/XenolveLogoBgCropped.png" alt="Logo" width={150} height={100} />
                 </Link>
 
                 {/* Desktop Nav */}

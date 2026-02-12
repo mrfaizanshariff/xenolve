@@ -35,6 +35,39 @@ const TIERS = [
             "1 Month Support"
         ],
     },
+    {
+        name: "AI Soutions",
+        price: "$2,500",
+        popular: true,
+        description: "Custom AI agents, automation, and data intelligence to streamline operations and unlock insights.",
+        features: [
+            "Custom AI Agents",
+            "Automation",
+            "Data Intelligence",
+            "Custom Chatbots",
+            "Voice Agents",
+            "AI-Powered Analytics",
+            "ML Model Development",
+            "Integration with Existing Systems",
+            "Ongoing Support & Optimization"
+
+        ],
+    },
+    {
+        name: "Data Science and Data Analytics",
+        price: "$2,500",
+        popular: true,
+        description: "Transform your raw data into actionable insights with our data science and analytics services.",
+        features: [
+            "Data Collection and Cleaning",
+            "Data Visualization",
+            "Predictive Modeling",
+            "Machine Learning",
+            "Business Intelligence",
+            "Integration with Existing Systems",
+            "Ongoing Support & Optimization"
+        ],
+    },
 
     {
         name: "Mobile App Development",
@@ -51,7 +84,7 @@ const TIERS = [
         ],
     },
     {
-        name: "Enterprise",
+        name: "Technology Partner",
         price: "Custom",
         popular: true,
         description: "Dedicated engineering teams, AI solutions, Shopify scale, and mission-critical software.",

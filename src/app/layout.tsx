@@ -25,6 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+      </head>
       <body className={inter.className}>
         <GoogleAnalytics gaId="G-2JC8F249GN" />
         <ThemeProvider
