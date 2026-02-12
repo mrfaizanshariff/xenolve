@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Badge } from '@/components/ui/badge';
 import { CalendarIcon, Clock, ArrowRight } from 'lucide-react';
 import { Metadata } from 'next';
+import { DailyNewsSection } from '@/components/daily-news-section';
 
 export const metadata: Metadata = {
     title: 'Blog | Xenolve',
@@ -24,7 +25,10 @@ export default function BlogPage() {
                         Explore the latest trends in software engineering, AI agents, and digital product strategy.
                     </p>
                 </div>
+                <div>
+                    <DailyNewsSection />
 
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {posts.map((post) => (
                         <Link key={post.slug} href={`/blog/${post.slug}`} className="group h-full">

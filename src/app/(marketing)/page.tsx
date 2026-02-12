@@ -5,6 +5,7 @@ import { Stats } from "@/components/sections/stats";
 import { CaseStudies } from "@/components/sections/case-studies";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Pricing } from "@/components/sections/pricing";
+import { DailyNewsSection } from "@/components/daily-news-section";
 import { CTA } from "@/components/sections/cta";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
             <CaseStudies />
             <Testimonials />
             <Pricing />
+            <DailyNewsSection />
             <CTA />
         </>
     );
