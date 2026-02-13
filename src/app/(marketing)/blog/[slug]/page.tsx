@@ -101,7 +101,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         return (
             <div className="py-20 min-h-screen">
                 <Container className="max-w-4xl">
-                    <Link href="/blog" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors group">
+                    <Link href="/blog" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary pb-8 mt-3 transition-colors group">
                         <ChevronLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
                         Back to Blog
                     </Link>

@@ -50,7 +50,7 @@ export async function DailyNewsSection() {
                 </div>
 
                 <div
-                    className="flex overflow-x-auto pb-8 -mx-4 px-4 md:-mx-0 md:px-0 gap-6 snap-x snap-mandatory scrollbar-hide md:scrollbar-default"
+                    className="flex scroll-box overflow-x-auto pb-8 -mx-4 px-4 md:-mx-0 md:px-0 gap-6 snap-x snap-mandatory scrollbar-hide md:scrollbar-default"
                 >
                     {posts.map((post) => (
                         <div key={post.slug} className="snap-center shrink-0 w-[85vw] sm:w-[350px]">
