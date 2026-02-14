@@ -35,8 +35,8 @@ export function Navbar() {
             )}
         >
             <Container className="flex items-center justify-between">
-                <Link href="/" className="text-2xl w-[80px] h-[40px] md:w-[150px] md:h-[100px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                    <Image src="/xenolveLogoBgCropped.png" alt="Logo" width={150} height={100} />
+                <Link href="/" className="text-2xl w-[80px] h-[40px] md:w-[150px] md:h-[50px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+                    <Image src="/xenolveLogoBgCropped.png" alt="Logo" width={150} height={50} />
                 </Link>
 
                 {/* Desktop Nav */}
