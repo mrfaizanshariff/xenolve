@@ -123,31 +123,31 @@ const TEAM_MEMBERS = [
     {
         name: "Faizan Shariff",
         role: "Founder & Lead Software Engineer",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
+        image: "/faizanDp.jpg",
         bio: "Full-stack architect with a passion for scalable systems and AI integration. Previously built solutions for fintech and healthcare."
     },
     {
         name: "Mohammed Maaz",
         role: "Founder & Lead AI Engineer",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+        image: "/maazDp.png",
         bio: "Full-stack architect with a passion for scalable systems and AI integration. Previously built solutions for fintech and healthcare."
     },
-    {
-        name: "Marcus Johnson",
-        role: "Senior AI Engineer",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&q=80",
-        bio: "Specialist in LLMs and computer vision. Transforming complex AI research into practical business applications."
-    },
-    {
-        name: "Elena Rodriguez",
-        role: "Mobile Lead",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&q=80",
-        bio: "Mobile development expert with 10+ years of experience in iOS and React Native ecosystems."
-    },
-    {
-        name: "David Kim",
-        role: "Backend Architect",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&q=80",
-        bio: "Building robust cloud infrastructure and microservices that power high-traffic applications."
-    },
+    // {
+    //     name: "Marcus Johnson",
+    //     role: "Senior AI Engineer",
+    //     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&q=80",
+    //     bio: "Specialist in LLMs and computer vision. Transforming complex AI research into practical business applications."
+    // },
+    // {
+    //     name: "Elena Rodriguez",
+    //     role: "Mobile Lead",
+    //     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&q=80",
+    //     bio: "Mobile development expert with 10+ years of experience in iOS and React Native ecosystems."
+    // },
+    // {
+    //     name: "David Kim",
+    //     role: "Backend Architect",
+    //     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&q=80",
+    //     bio: "Building robust cloud infrastructure and microservices that power high-traffic applications."
+    // },
 ];

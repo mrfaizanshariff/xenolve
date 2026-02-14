@@ -16,7 +16,7 @@ export default function Home() {
             <ServicesGrid />
             <Stats />
             <CaseStudies />
-            <Testimonials />
+            {/* <Testimonials /> */}
             <Pricing />
             <DailyNewsSection />
             <CTA />
