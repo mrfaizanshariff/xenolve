@@ -27,6 +27,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="apple-touch-icon" href="/favicon.ico" />
+        <meta name="google-site-verification" content="coV8zdqFgxehypiLSaEQM1vdk7P10c0aEITa_NDgzUk" />
       </head>
       <body className={inter.className}>
         <GoogleAnalytics gaId="G-2JC8F249GN" />

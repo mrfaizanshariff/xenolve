@@ -4,25 +4,24 @@ import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { BlogPost, BlogPostPreview } from '@/types/blog';
 
-const BLOG_DIR = path.join(process.cwd(), 'content/blog');
-
-export function getBlogPosts(): BlogPostPreview[] {
+export function getBlogPosts(isBlogPost: boolean = true): BlogPostPreview[] {
+    const DIR = isBlogPost ? path.join(process.cwd(), 'content/blog') : path.join(process.cwd(), 'content/dailyNews');
     console.log('Generating static params for blog posts...');
     // Ensure directory exists
-    console.log('Loading blog posts from:', BLOG_DIR);
-    if (!fs.existsSync(BLOG_DIR)) {
-        console.warn('Blog directory not found:', BLOG_DIR);
+    console.log('Loading blog posts from:', DIR);
+    if (!fs.existsSync(DIR)) {
+        console.warn('Blog directory not found:', DIR);
         return [];
     }
 
-    const files = fs.readdirSync(BLOG_DIR);
+    const files = fs.readdirSync(DIR);
 
     const posts = files
         .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
         .map((file) => {
             try {
                 const slug = file.replace(/\.mdx?$/, '');
-                const fullPath = path.join(BLOG_DIR, file);
+                const fullPath = path.join(DIR, file);
                 const fileContents = fs.readFileSync(fullPath, 'utf8');
 
                 const { data, content } = matter(fileContents);
@@ -48,9 +47,10 @@ export function getBlogPosts(): BlogPostPreview[] {
     return posts.sort((a, b) => (new Date(b.date).getTime() - new Date(a.date).getTime()));
 }
 
-export function getBlogPost(slug: string): BlogPost | null {
-    const mdPath = path.join(BLOG_DIR, `${slug}.md`);
-    const mdxPath = path.join(BLOG_DIR, `${slug}.mdx`);
+export function getBlogPost(slug: string, isBlogPost: boolean = true): BlogPost | null {
+    const DIR = isBlogPost ? path.join(process.cwd(), 'content/blog') : path.join(process.cwd(), 'content/dailyNews');
+    const mdPath = path.join(DIR, `${slug}.md`);
+    const mdxPath = path.join(DIR, `${slug}.mdx`);
 
     let fullPath = '';
     if (fs.existsSync(mdPath)) {
@@ -58,7 +58,7 @@ export function getBlogPost(slug: string): BlogPost | null {
     } else if (fs.existsSync(mdxPath)) {
         fullPath = mdxPath;
     } else {
-        console.warn(`Post not found for slug: ${slug} at ${BLOG_DIR}`);
+        console.warn(`Post not found for slug: ${slug} at ${DIR}`);
         return null;
     }
 
@@ -84,8 +84,8 @@ export function getBlogPost(slug: string): BlogPost | null {
     }
 }
 
-export function getAllTags(): string[] {
-    const posts = getBlogPosts();
+export function getAllTags(isBlogPost: boolean = true): string[] {
+    const posts = getBlogPosts(isBlogPost);
     const tags = new Set<string>();
     posts.forEach(post => post.tags.forEach(tag => tags.add(tag)));
     return Array.from(tags);

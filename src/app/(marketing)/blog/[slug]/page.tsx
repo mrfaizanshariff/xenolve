@@ -11,15 +11,22 @@ import { notFound } from 'next/navigation';
 
 // For generating static paths
 export async function generateStaticParams() {
-    const posts = getBlogPosts();
-    return posts.map((post) => ({
+    const blogPosts = getBlogPosts(true);
+    const dailyNewsPosts = getBlogPosts(false);
+    const allPosts = [...blogPosts, ...dailyNewsPosts];
+
+    return allPosts.map((post) => ({
         slug: post.slug,
     }));
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     try {
-        const post = getBlogPost(params.slug);
+        let post = getBlogPost(params.slug, true);
+        if (!post) {
+            post = getBlogPost(params.slug, false);
+        }
+
         if (!post) {
             return {
                 title: 'Post Not Found',
@@ -82,7 +89,10 @@ const components = {
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
     try {
-        const post = getBlogPost(params.slug);
+        let post = getBlogPost(params.slug, true);
+        if (!post) {
+            post = getBlogPost(params.slug, false);
+        }
 
         if (!post) {
             notFound();
@@ -91,7 +101,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         return (
             <div className="py-20 min-h-screen">
                 <Container className="max-w-4xl">
-                    <Link href="/blog" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors group">
+                    <Link href="/blog" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary pb-8 mt-3 transition-colors group">
                         <ChevronLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
                         Back to Blog
                     </Link>
