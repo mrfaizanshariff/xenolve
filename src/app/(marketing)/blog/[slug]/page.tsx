@@ -49,7 +49,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
                 title: post.title,
                 description: post.description,
                 images: post.coverImage ? [post.coverImage] : [],
-            }
+            },
+            alternates: {
+                canonical: `/blog/${post.slug}`,
+            },
         };
     } catch (error) {
         console.error('Error generating metadata:', error);

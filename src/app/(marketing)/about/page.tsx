@@ -1,8 +1,12 @@
-"use client";
 import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { Stats } from "@/components/sections/stats";
-import { motion } from "framer-motion";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "About Xenolve | Premium Software & AI Agency",
+    description: "Xenolve is a full-stack digital agency building scalable web apps, AI solutions, and enterprise software. Learn about our team and mission.",
+};
 
 export default function AboutPage() {
     return (

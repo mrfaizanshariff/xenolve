@@ -7,6 +7,12 @@ import { Heading } from "@/components/ui/heading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CASE_STUDIES } from "@/lib/case-studies";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Our Work | Case Studies & Success Stories",
+    description: "Explore how Xenolve helps businesses grow with custom software, AI integration, and digital transformation. Read our case studies.",
+};
 
 export default function WorkPage() {
     return (

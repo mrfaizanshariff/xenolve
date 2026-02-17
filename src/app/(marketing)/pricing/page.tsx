@@ -1,6 +1,12 @@
 import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { Pricing } from "@/components/sections/pricing";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Pricing | Xenolve",
+    description: "Transparent pricing for teams of all sizes. Choose the plan that fits your business needs.",
+};
 
 export default function PricingPage() {
     return (

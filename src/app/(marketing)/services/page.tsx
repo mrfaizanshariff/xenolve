@@ -1,6 +1,12 @@
 import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { ServicesGrid } from "@/components/sections/services-grid";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Services | Xenolve",
+    description: "End-to-end software development services: Custom Web Apps, AI Agents, Shopify Development, Mobile Apps, and Technical Consulting.",
+};
 
 export default function ServicesPage() {
     return (
