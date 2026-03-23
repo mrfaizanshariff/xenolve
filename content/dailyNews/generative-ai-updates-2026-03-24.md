@@ -12,33 +12,37 @@ coverImage: /dailyNewsThumbnail.png
 {
   "news": [
     {
-      "topic": "OpenAI GPT-5.4 \"Thinking\" Model Hits 83% on GDPVal Benchmark",
-      "description": "OpenAI’s latest GPT-5.4 model achieved 83.0% on the GDPVal benchmark, surpassing human expert performance on economically valuable tasks and signaling a major leap in LLM reasoning capabilities."
-    },
-    {
       "topic": "Anthropic Launches Claude Opus 4.6 with Adaptive Thinking",
-      "description": "Claude Opus 4.6 introduces adaptive thinking, letting the model decide when deeper reasoning is needed, and adds context compaction to automatically summarize older conversation history."
+      "description": "Anthropic introduced Claude Opus 4.6, featuring \"adaptive thinking\" that automatically decides when deeper reasoning is needed and supports context compaction to manage conversation limits."
     },
     {
-      "topic": "Alibaba’s Qwen 3.5 9B Matches 120B OpenAI Model on GPQA Diamond",
-      "description": "Alibaba released the Qwen 3.5 9‑parameter‑billion model, which outperforms many larger models and matches OpenAI’s 120B‑parameter model on the GPQA Diamond benchmark."
+      "topic": "OpenAI Surpasses $25 Billion in Annualized Revenue",
+      "description": "OpenAI reported annualized revenue exceeding $25 billion, underscoring rapid market adoption of its advanced AI models and hinting at a potential public listing by late 2026."
     },
     {
-      "topic": "Nvidia Unveils Nemotron 3 Super for Multi‑Agent AI Systems",
-      "description": "Nemotron 3 Super, an open‑weight 120B‑parameter model, supports a one‑million‑token context window and is optimized for complex agentic AI tasks such as coding, reasoning, and long‑context processing."
+      "topic": "MIT Researchers Unveil AI Model to Accelerate Protein‑Drug Design",
+      "description": "A new generative AI model from MIT predicts protein folding and interactions with unprecedented accuracy, promising billions in R&D savings for pharmaceutical companies."
     },
     {
-      "topic": "MIT Generative AI Model Accelerates Protein‑Drug Design",
-      "description": "Researchers at MIT created a generative AI system that predicts protein folding and interactions with unprecedented accuracy, potentially saving billions in pharmaceutical R&D by streamlining drug discovery."
+      "topic": "NVIDIA Expands Open Model Families with Nemotron Suite",
+      "description": "NVIDIA announced broader availability of its Nemotron open‑model family, enabling developers worldwide to build sovereign AI agents for language, robotics, and scientific discovery."
     },
     {
-      "topic": "Google Gemini 3.1 Flash‑Lite Introduces Sharply Lower Pricing",
-      "description": "Google announced Gemini 3.1 Flash‑Lite, a cost‑reduced variant of its Gemini series, aimed at making high‑performance generative AI more accessible to enterprises and developers."
+      "topic": "Google Rolls Out Gemini 3.1 Flash‑Lite at Lower Pricing",
+      "description": "Google released Gemini 3.1 Flash‑Lite, a cost‑effective variant of its Gemini series, aimed at making high‑performance generative AI more accessible to startups and enterprises."
     },
     {
-      "topic": "Lightricks LTX 2.3 Generates Native 4K Video with Synchronized Audio",
-      "description": "Lightricks released LTX 2.3, an open‑source model capable of producing native 4K video and synchronized audio in a single pass, opening new possibilities for real‑time content creation."
+      "topic": "Alibaba Debuts Qwen 3.5, Challenging Western AI Leaders",
+      "description": "Alibaba’s AI lab launched Qwen 3.5, a large language model designed to match or exceed the capabilities of leading Western counterparts, intensifying global AI competition."
+    },
+    {
+      "topic": "Pattern Computer Publishes Explainable AI Framework in Nature Scientific Reports",
+      "description": "Pattern Computer introduced a prototype‑based explainable AI framework for mitosis detection, combining deep learning performance with transparent, human‑aligned reasoning."
+    },
+    {
+      "topic": "Morgan Stanley Warns of a Major AI Breakthrough Coming in 2026",
+      "description": "Morgan Stanley’s report highlights that OpenAI’s GPT‑5.4 \"Thinking\" model scored 83% on the GDPVal benchmark, signaling a transformative AI leap that could outpace current infrastructure."
     }
   ],
-  "linkedin_post": "## Latest AI Breakthroughs and Model Releases: March 2026\n\nStay ahead in the rapidly evolving AI landscape with the latest updates:\n\n📌 OpenAI's GPT-5.4 \"Thinking\" model has achieved 83.0% on the GDPVal benchmark, outperforming human experts in economically valuable tasks.\n🤖 Anthropic introduced \"adaptive thinking\" in Claude Opus 4.6, allowing for dynamic reasoning and context compaction.\n🚀 Alibaba released Qwen 3.5, a 9B open model that matches OpenAI's 120B parameter model on GPQA Diamond.\n💡 MIT researchers developed a generative AI model that streamlines protein‑based drug design, potentially saving billions in R&D costs.\n🧠 Nvidia's Nemotron 3 Super model is designed for complex agentic AI systems, supporting a one‑million‑token context window and delivering faster inference.\n🚀 Lightricks shipped LTX 2.3, generating native 4K video with synchronized audio in a single open‑source pass.\n📌 Google's Cloud AI chief discussed the three frontiers of model capability: raw intelligence, task‑specific tuning, and efficiency.\n🤖 Apple is set to unveil AI advancements at WWDC 2026 in June.\n\nThese breakthroughs are redefining AI capabilities and applications. Stay tuned for more updates! #ArtificialIntelligence #MachineLearning #AITools #TechNews #Innovation"
+  "linkedinPost": "## Latest AI Breakthroughs: Transforming Industries with Cutting-Edge Tech\n\nAs we dive into the latest AI advancements, it's clear that the field is evolving at an unprecedented pace. Here are the top AI updates that are making waves:\n\n📌 **OpenAI Surpasses $25 Billion in Annualized Revenue** – OpenAI has reached a significant milestone, surpassing $25 B in annualized revenue, reflecting soaring demand for advanced AI models across sectors.\n\n🤖 **Anthropic Introduces \"Adaptive Thinking\" with Claude Opus 4.6** – The new Claude Opus 4.6 can automatically decide when deeper reasoning is needed, boosting problem‑solving efficiency.\n\n🚀 **MIT Develops AI Model for Protein‑Based Drug Design** – This generative AI streamlines protein drug design, potentially saving billions in R&D and accelerating treatments for cancer, autoimmune and rare diseases.\n\n💡 **NVIDIA Expands Open Model Families** – NVIDIA’s Nemotron suite now powers intelligent agents worldwide, enabling breakthroughs from robotics to scientific discovery.\n\n🧠 **Google Releases Gemini 3.1 Flash‑Lite** – A more affordable Gemini variant makes high‑performance generative AI accessible to startups and enterprises.\n\n📈 **Alibaba Unveils Qwen 3.5** – Alibaba’s latest LLM challenges Western leaders, intensifying global AI competition.\n\n💻 **Pattern Computer Publishes Explainable AI Framework** – A novel XAI framework combines deep‑learning power with transparent reasoning for regulated, high‑stakes industries.\n\n#ArtificialIntelligence #MachineLearning #AITools #TechNews #Innovation #AIResearch #FutureOfWork #TechTrends"
 }
