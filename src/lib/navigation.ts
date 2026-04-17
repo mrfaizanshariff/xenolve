@@ -35,6 +35,7 @@ export const FOOTER_LINKS = [
             { label: "Whitepapers", href: "/resources/whitepapers" },
             { label: "Documentation", href: "/docs" },
             { label: "Status", href: "/status" },
+            { label: "Lightech Sales Buddy", href: "/lightech-sales-buddy" },
         ],
     },
     {
