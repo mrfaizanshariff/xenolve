@@ -9,6 +9,7 @@ export function LightechSalesBuddyContent() {
     const [file, setFile] = useState<File | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [processingStatus, setProcessingStatus] = useState<string>('');
     const [result, setResult] = useState<{
         filename: string;
         extracted_fields: Record<string, any>;
@@ -29,12 +30,61 @@ export function LightechSalesBuddyContent() {
         }
     };
 
+    const pollStatus = async (sessionId: string) => {
+        const maxAttempts = 60; // Poll for up to 5 minutes (60 * 5 seconds)
+        let attempts = 0;
+
+        while (attempts < maxAttempts) {
+            try {
+                const statusResponse = await fetch(`/api/extract?session_id=${sessionId}`);
+                
+                if (!statusResponse.ok) {
+                    const errorData = await statusResponse.json();
+                    throw new Error(errorData.error || "Failed to check extraction status");
+                }
+
+                const statusData = await statusResponse.json();
+
+                if (statusData.status === 'completed') {
+                    // Extraction complete
+                    setResult({
+                        filename: statusData.filename,
+                        extracted_fields: statusData.extracted_fields,
+                        file_base64: statusData.file_base64
+                    });
+                    setProcessingStatus('Extraction completed successfully!');
+                    setIsLoading(false);
+                    return;
+                } else if (statusData.status === 'failed') {
+                    throw new Error(statusData.error || "Extraction failed");
+                } else {
+                    // Still processing
+                    const progress = statusData.progress || 0;
+                    setProcessingStatus(`Processing... ${progress > 0 ? `${progress}%` : 'Please wait'}`);
+                }
+
+                // Wait 5 seconds before next poll
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                attempts++;
+            } catch (err: any) {
+                setError(err.message || "Error checking extraction status");
+                setIsLoading(false);
+                return;
+            }
+        }
+
+        // Timeout
+        setError("Extraction timed out. Please try again.");
+        setIsLoading(false);
+    };
+
     const handleProcess = async () => {
         if (!file) return;
 
         setIsLoading(true);
         setError(null);
         setResult(null);
+        setProcessingStatus('Uploading PDF...');
 
         try {
             // Read file as base64
@@ -48,7 +98,9 @@ export function LightechSalesBuddyContent() {
             };
 
             const base64 = await getBase64(file);
+            setProcessingStatus('Submitting for extraction...');
 
+            // Step 1: Submit PDF for async extraction
             const response = await fetch('/api/extract', {
                 method: 'POST',
                 headers: {
@@ -66,11 +118,20 @@ export function LightechSalesBuddyContent() {
             }
 
             const data = await response.json();
-            setResult(data);
+            
+            if (!data.session_id) {
+                throw new Error("No session ID received from server");
+            }
+
+            setProcessingStatus('PDF submitted. Starting extraction...');
+
+            // Step 2: Poll for completion
+            await pollStatus(data.session_id);
+
         } catch (err: any) {
             setError(err.message || "An unexpected error occurred");
-        } finally {
             setIsLoading(false);
+            setProcessingStatus('');
         }
     };
 
@@ -169,9 +230,14 @@ export function LightechSalesBuddyContent() {
                                         Extract Data
                                     </span>
                                     {isLoading && (
-                                        <div className="absolute inset-0 flex items-center justify-center gap-2">
-                                            <Loader2 className="w-5 h-5 animate-spin" />
-                                            <span>Processing AI...</span>
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                                            <div className="flex items-center gap-2">
+                                                <Loader2 className="w-5 h-5 animate-spin" />
+                                                <span>Processing...</span>
+                                            </div>
+                                            {processingStatus && (
+                                                <span className="text-xs text-muted-foreground">{processingStatus}</span>
+                                            )}
                                         </div>
                                     )}
                                 </Button>
@@ -195,7 +261,7 @@ export function LightechSalesBuddyContent() {
                                     </p>
                                 </div>
 
-                                <div className="bg-background/50 rounded-xl p-6 border border-border/50">
+                                {/* <div className="bg-background/50 rounded-xl p-6 border border-border/50">
                                     <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Extracted Summary</h4>
                                     <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         {Object.entries(result.extracted_fields).map(([key, value]) => {
@@ -210,7 +276,7 @@ export function LightechSalesBuddyContent() {
                                             return null;
                                         })}
                                     </dl>
-                                </div>
+                                </div> */}
 
                                 <div className="flex flex-col sm:flex-row gap-4">
                                     <Button
