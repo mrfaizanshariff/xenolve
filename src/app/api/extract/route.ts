@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-const API_BASE_URL = 'https://modern-nice-fish.ngrok-free.app/api/v1/standalone';
+const API_BASE_URL = 'https://modern-nice-fish.ngrok-free.app/api/v1';
 
 export async function POST(req: Request) {
     try {
@@ -85,7 +85,7 @@ export async function GET(req: Request) {
             const excelBase64 = statusData.output?.excel_base64 || statusData.excel_base64 || statusData.file_base64;
             const extractedFields = statusData.extracted_fields || statusData.output?.extracted_fields || {};
             const filename = statusData.filename || statusData.output?.filename || 'extracted_quotation.xlsx';
-            
+
             return NextResponse.json({
                 status: 'completed',
                 file_base64: excelBase64,
