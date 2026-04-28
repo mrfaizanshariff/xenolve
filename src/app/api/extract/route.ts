@@ -84,7 +84,7 @@ export async function GET(req: Request) {
             // Extract the Excel file in base64 format
             const excelBase64 = statusData.output?.excel_base64 || statusData.excel_base64 || statusData.file_base64;
             const extractedFields = statusData.extracted_fields || statusData.output?.extracted_fields || {};
-            const filename = statusData.filename || statusData.output?.filename || 'extracted_quotation.xlsx';
+            const filename = statusData.file_name || statusData.output?.filename || 'extracted_quotation.xlsx';
 
             return NextResponse.json({
                 status: 'completed',
