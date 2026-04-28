@@ -85,7 +85,7 @@ export async function GET(req: Request) {
 
         let statusData;
         try {
-            const statusResponse = await fetch(`${API_BASE_URL}/status/${sessionId}`, {
+            const statusResponse = await fetch(`${API_BASE_URL}/extract/status/${sessionId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -128,7 +128,15 @@ export async function GET(req: Request) {
             // Extract the Excel file in base64 format
             const excelBase64 = statusData.output?.excel_base64 || statusData.excel_base64 || statusData.file_base64;
             const extractedFields = statusData.extracted_fields || statusData.output?.extracted_fields || {};
-            const filename = statusData.file_name || statusData.output?.filename || 'extracted_quotation.xlsx';
+            let filename = statusData.file_name || statusData.output?.filename || 'extracted_quotation.xlsx';
+            
+            // Strip .pdf extension if present and replace with .xlsx
+            if (filename.toLowerCase().endsWith('.pdf')) {
+                filename = filename.slice(0, -4) + '.xlsx';
+            } else if (!filename.toLowerCase().endsWith('.xlsx')) {
+                // If no extension or different extension, ensure it ends with .xlsx
+                filename = filename.replace(/\.[^.]*$/, '') + '.xlsx';
+            }
 
             return NextResponse.json({
                 status: 'completed',
