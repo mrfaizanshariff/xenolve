@@ -96,6 +96,15 @@ export async function GET(req: Request) {
             clearTimeout(timeoutId);
 
             if (!statusResponse.ok) {
+                // Handle 404 - session might not be ready yet
+                if (statusResponse.status === 404) {
+                    console.log('Session not found yet (404), returning initializing status');
+                    return NextResponse.json({
+                        status: 'initializing',
+                        progress: 0
+                    });
+                }
+                
                 const errorText = await statusResponse.text();
                 console.error('Status API Error:', errorText);
                 throw new Error(`Failed to get extraction status: ${statusResponse.status} ${statusResponse.statusText}`);

@@ -34,6 +34,13 @@ export function LightechSalesBuddyContent() {
         const maxAttempts = 60; // Poll for up to 5 minutes (60 * 5 seconds)
         let attempts = 0;
 
+        // Initial 10-second delay before first status check
+        setProcessingStatus('Initializing extraction... (10s)');
+        for (let i = 10; i > 0; i--) {
+            setProcessingStatus(`Initializing extraction... (${i}s)`);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+
         while (attempts < maxAttempts) {
             try {
                 const statusResponse = await fetch(`/api/extract?session_id=${sessionId}`);
@@ -58,9 +65,10 @@ export function LightechSalesBuddyContent() {
                 } else if (statusData.status === 'failed') {
                     throw new Error(statusData.error || "Extraction failed");
                 } else {
-                    // Still processing
+                    // Still processing or initializing
                     const progress = statusData.progress || 0;
-                    setProcessingStatus(`Processing... ${progress > 0 ? `${progress}%` : 'Please wait'}`);
+                    const statusText = statusData.status === 'initializing' ? 'Initializing' : 'Processing';
+                    setProcessingStatus(`${statusText}... ${progress > 0 ? `${progress}%` : 'Please wait'}`);
                 }
 
                 // Wait 5 seconds before next poll
@@ -69,6 +77,7 @@ export function LightechSalesBuddyContent() {
             } catch (err: any) {
                 setError(err.message || "Error checking extraction status");
                 setIsLoading(false);
+                setProcessingStatus('');
                 return;
             }
         }
