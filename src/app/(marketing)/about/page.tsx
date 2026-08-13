@@ -2,15 +2,28 @@ import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { Stats } from "@/components/sections/stats";
 import { Metadata } from "next";
+import { buildBreadcrumbSchema, ldJson } from "@/lib/seo";
 
 export const metadata: Metadata = {
-    title: "About Xenolve | Premium Software & AI Agency",
-    description: "Xenolve is a full-stack digital agency building scalable web apps, AI solutions, and enterprise software. Learn about our team and mission.",
+    title: "About Xenolve — Premium Software & AI Engineering Agency",
+    description: "Xenolve is a full-stack digital agency in Bengaluru building scalable web apps, AI agents, and enterprise software for India, the Middle East, and global clients.",
+    alternates: { canonical: "/about" },
+    openGraph: {
+        title: "About Xenolve — Premium Software & AI Engineering Agency",
+        description: "Xenolve is a full-stack digital agency in Bengaluru building scalable web apps, AI agents, and enterprise software.",
+        url: "/about",
+    },
 };
+
+const breadcrumb = buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "About", url: "/about" },
+]);
 
 export default function AboutPage() {
     return (
         <div className="py-20">
+            <script type="application/ld+json" dangerouslySetInnerHTML={ldJson(breadcrumb)} />
             {/* <Container>
                 <Heading level={1}>About Xenolve</Heading>
                 <Heading level={5}>A Premium Software Development & AI Engineering Agency</Heading>

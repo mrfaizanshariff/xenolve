@@ -6,8 +6,10 @@ import { Badge } from '@/components/ui/badge';
 import { CalendarIcon, Clock, ChevronLeft } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
+import { SITE_CONFIG } from '@/lib/constants';
 
 // For generating static paths
 export async function generateStaticParams() {
@@ -20,35 +22,50 @@ export async function generateStaticParams() {
     }));
 }
 
+function resolvePost(slug: string) {
+    let post = getBlogPost(slug, true);
+    if (!post) {
+        post = getBlogPost(slug, false);
+    }
+    return post;
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     try {
-        let post = getBlogPost(params.slug, true);
-        if (!post) {
-            post = getBlogPost(params.slug, false);
-        }
+        const post = resolvePost(params.slug);
 
         if (!post) {
             return {
                 title: 'Post Not Found',
+                robots: { index: false, follow: false },
             };
         }
 
+        const ogImages = post.coverImage
+            ? [{ url: post.coverImage, width: 1200, height: 630, alt: post.title }]
+            : [{ url: '/xenolveLogoBg.png', width: 1200, height: 630, alt: post.title }];
+
         return {
-            title: `${post.title} | Xenolve Blog`,
+            title: post.title,
             description: post.description,
+            keywords: post.tags,
+            authors: post.author?.name ? [{ name: post.author.name }] : [{ name: 'Xenolve Team' }],
             openGraph: {
                 title: post.title,
                 description: post.description,
                 type: 'article',
                 publishedTime: post.date,
+                modifiedTime: post.date,
                 authors: [post.author?.name || 'Xenolve Team'],
-                images: post.coverImage ? [post.coverImage] : [],
+                tags: post.tags,
+                url: `${SITE_CONFIG.url}/blog/${post.slug}`,
+                images: ogImages,
             },
             twitter: {
                 card: 'summary_large_image',
                 title: post.title,
                 description: post.description,
-                images: post.coverImage ? [post.coverImage] : [],
+                images: ogImages.map((i) => i.url),
             },
             alternates: {
                 canonical: `/blog/${post.slug}`,
@@ -57,8 +74,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     } catch (error) {
         console.error('Error generating metadata:', error);
         return {
-            title: 'Error | Xenolve Blog',
+            title: 'Error',
             description: 'An error occurred while loading this post.',
+            robots: { index: false, follow: false },
         };
     }
 }
@@ -83,26 +101,72 @@ const components = {
     ),
     hr: (props: any) => <hr className="my-12 border-border" {...props} />,
     a: (props: any) => <a className="text-primary hover:underline underline-offset-4 font-medium" {...props} />,
-    img: (props: any) => (
+    img: ({ alt, ...props }: any) => (
         <div className="my-8 rounded-xl overflow-hidden border border-border/50 shadow-lg">
-            <img className="w-full h-auto object-cover" {...props} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt={alt || ''} className="w-full h-auto object-cover" {...props} />
         </div>
     ),
 };
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
     try {
-        let post = getBlogPost(params.slug, true);
-        if (!post) {
-            post = getBlogPost(params.slug, false);
-        }
+        const post = resolvePost(params.slug);
 
         if (!post) {
             notFound();
         }
 
+        const postUrl = `${SITE_CONFIG.url}/blog/${post.slug}`;
+        const postImage = post.coverImage || `${SITE_CONFIG.url}/xenolveLogoBg.png`;
+
+        const articleSchema = {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': postUrl,
+            },
+            headline: post.title,
+            description: post.description,
+            image: postImage,
+            datePublished: post.date,
+            dateModified: post.date,
+            keywords: post.tags.join(', '),
+            author: {
+                '@type': 'Person',
+                name: post.author?.name || 'Xenolve Team',
+            },
+            publisher: {
+                '@type': 'Organization',
+                name: SITE_CONFIG.name,
+                logo: {
+                    '@type': 'ImageObject',
+                    url: `${SITE_CONFIG.url}/xenolveLogoBg.png`,
+                },
+            },
+        };
+
+        const breadcrumbSchema = {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_CONFIG.url },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_CONFIG.url}/blog` },
+                { '@type': 'ListItem', position: 3, name: post.title, item: postUrl },
+            ],
+        };
+
         return (
             <div className="py-28 min-h-screen">
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+                />
                 <Container className="max-w-4xl">
                     <Link href="/blog" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary pb-8 mt-3 transition-colors group">
                         <ChevronLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
@@ -144,10 +208,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
                         {post.coverImage && (
                             <div className="aspect-[21/9] w-full overflow-hidden rounded-2xl mb-12 border border-border/50 shadow-2xl relative">
-                                <img
+                                <Image
                                     src={post.coverImage}
                                     alt={post.title}
-                                    className="absolute inset-0 w-full h-full object-cover"
+                                    fill
+                                    priority
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 896px"
+                                    className="object-cover"
                                 />
                             </div>
                         )}

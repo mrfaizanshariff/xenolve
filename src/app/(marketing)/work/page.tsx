@@ -8,15 +8,28 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import { Metadata } from "next";
+import { buildBreadcrumbSchema, ldJson } from "@/lib/seo";
 
 export const metadata: Metadata = {
-    title: "Our Work | Case Studies & Success Stories",
-    description: "Explore how Xenolve helps businesses grow with custom software, AI integration, and digital transformation. Read our case studies.",
+    title: "Case Studies & Client Success Stories",
+    description: "Explore how Xenolve helps startups and enterprises build scalable web platforms, AI agents, Shopify eCommerce systems, and custom software that deliver measurable business results.",
+    alternates: { canonical: "/work" },
+    openGraph: {
+        title: "Case Studies & Client Success Stories | Xenolve",
+        description: "Case studies from Xenolve's AI, software, and eCommerce projects.",
+        url: "/work",
+    },
 };
+
+const breadcrumb = buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Work", url: "/work" },
+]);
 
 export default function WorkPage() {
     return (
         <div className="py-20 md:py-32">
+            <script type="application/ld+json" dangerouslySetInnerHTML={ldJson(breadcrumb)} />
             <Container>
                 <div className="max-w-3xl mb-16 md:mb-24">
                     <Heading level={1} className="mb-6">Software Development Case Studies & Client Success Stories</Heading>

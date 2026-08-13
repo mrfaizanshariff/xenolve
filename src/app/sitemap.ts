@@ -3,20 +3,20 @@ import { getBlogPosts } from '@/lib/blog'
 import { SITE_CONFIG } from '@/lib/constants'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const posts = getBlogPosts(true)
     const baseUrl = SITE_CONFIG.url
+    const blogPosts = getBlogPosts(true)
+    const dailyNewsPosts = getBlogPosts(false)
+    const allPosts = [...blogPosts, ...dailyNewsPosts]
 
-    const postsUrls = posts.map((post) => ({
+    const postsUrls = allPosts.map((post) => ({
         url: `${baseUrl}/blog/${post.slug}`,
         lastModified: new Date(post.date),
-        changeFrequency: 'weekly' as const,
-        priority: 0.8,
     }))
 
     const routes = [
         '',
         '/about',
-        '/#services',
+        '/services',
         '/work',
         '/blog',
         '/contact',
@@ -25,8 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: route === '' ? 1 : 0.9,
     }))
 
     return [...routes, ...postsUrls]

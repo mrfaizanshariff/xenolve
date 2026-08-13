@@ -1,6 +1,6 @@
 ---
 title: Latest Updates in Genrative AI Space
-author: {'name': 'Mohammed Maaz', 'picture': ''}
+author: {'name': 'Mohammed Maaz', 'picture': '/assets/authors/maaz.png'}
 tags:
   - Genrative AI
   - AI

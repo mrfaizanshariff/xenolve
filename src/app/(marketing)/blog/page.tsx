@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getBlogPosts } from '@/lib/blog';
 import { Container } from '@/components/ui/container';
 import { Heading } from '@/components/ui/heading';
@@ -9,8 +10,17 @@ import { Metadata } from 'next';
 import { DailyNewsSection } from '@/components/daily-news-section';
 
 export const metadata: Metadata = {
-    title: 'Blog | Xenolve',
-    description: 'Insights, tutorials, and news about software development, AI, and digital transformation.',
+    title: 'Blog — AI Agents, Software Engineering & Business Insights',
+    description: 'Deep dives on AI agents, autonomous software, Next.js, TypeScript, and digital transformation — practical writing from the Xenolve engineering team in Bengaluru.',
+    alternates: {
+        canonical: '/blog',
+    },
+    openGraph: {
+        title: 'Xenolve Blog — AI Agents, Software Engineering & Business Insights',
+        description: 'Deep dives on AI agents, autonomous software, Next.js, TypeScript, and digital transformation.',
+        type: 'website',
+        url: '/blog',
+    },
 };
 
 export default function BlogPage() {
@@ -35,10 +45,12 @@ export default function BlogPage() {
                             <Card className="h-full flex flex-col overflow-hidden border-border/50 bg-card/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg group-hover:-translate-y-1">
                                 <div className="aspect-video w-full overflow-hidden bg-muted relative">
                                     {post.coverImage ? (
-                                        <img
+                                        <Image
                                             src={post.coverImage}
                                             alt={post.title}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                                         />
                                     ) : (
                                         <div className="w-full h-full bg-gradient-to-br from-primary/10 to-transparent flex items-center justify-center text-muted-foreground">

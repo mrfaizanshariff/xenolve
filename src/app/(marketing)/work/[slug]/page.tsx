@@ -11,6 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Card, CardContent } from "@/components/ui/card";
+import { SITE_CONFIG } from "@/lib/constants";
+import { buildBreadcrumbSchema, ldJson } from "@/lib/seo";
 
 interface CaseStudyPageProps {
     params: {
@@ -25,12 +27,27 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
     if (!study) {
         return {
             title: "Case Study Not Found",
+            robots: { index: false, follow: false },
         };
     }
 
     return {
-        title: `${study.title} | ${study.serviceKeyword} | Xenolve Case Study`,
+        title: `${study.title} — ${study.serviceKeyword} Case Study`,
         description: study.overview,
+        alternates: { canonical: `/work/${study.slug}` },
+        openGraph: {
+            title: `${study.title} — ${study.serviceKeyword} Case Study | Xenolve`,
+            description: study.overview,
+            type: "article",
+            url: `${SITE_CONFIG.url}/work/${study.slug}`,
+            images: study.image ? [{ url: study.image, width: 1200, height: 630, alt: study.title }] : undefined,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `${study.title} — ${study.serviceKeyword} Case Study`,
+            description: study.overview,
+            images: study.image ? [study.image] : undefined,
+        },
     };
 }
 
@@ -50,8 +67,32 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
 
     const nextStudy = CASE_STUDIES[CASE_STUDIES.findIndex((s) => s.slug === params.slug) + 1] || CASE_STUDIES[0];
 
+    const breadcrumb = buildBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Work", url: "/work" },
+        { name: study.title, url: `/work/${study.slug}` },
+    ]);
+
+    const caseStudySchema = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        name: study.title,
+        headline: study.subtitle,
+        description: study.overview,
+        image: study.image,
+        url: `${SITE_CONFIG.url}/work/${study.slug}`,
+        creator: {
+            "@type": "Organization",
+            name: SITE_CONFIG.name,
+            url: SITE_CONFIG.url,
+        },
+        keywords: [study.category, study.serviceKeyword, ...study.techStack].join(", "),
+    };
+
     return (
         <article className="min-h-screen pb-20">
+            <script type="application/ld+json" dangerouslySetInnerHTML={ldJson(breadcrumb)} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={ldJson(caseStudySchema)} />
             {/* Hero Section */}
             <section className="relative overflow-hidden pt-32 pb-20 bg-muted/20 border-b">
                 <Container>

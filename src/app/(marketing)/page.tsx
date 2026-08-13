@@ -10,8 +10,21 @@ import { CTA } from "@/components/sections/cta";
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Xenolve | Enterprise AI Agents & Digital Engineering",
-    description: "Xenolve is a premium digital engineering agency specializing in building AI agents, modern web applications, and enterprise software solutions.",
+    title: {
+        absolute: "Xenolve | Enterprise AI Agents & Digital Engineering Agency",
+    },
+    description: "Xenolve is a premium digital engineering agency specializing in building AI agents, modern web applications, and enterprise software solutions for teams in India, the Middle East, and globally.",
+    keywords: [
+        "AI agents",
+        "AI agency",
+        "digital engineering",
+        "custom software development",
+        "Next.js agency",
+        "AI automation",
+        "enterprise AI",
+        "Bengaluru software agency",
+        "Middle East AI",
+    ],
     alternates: {
         canonical: "/",
     },
