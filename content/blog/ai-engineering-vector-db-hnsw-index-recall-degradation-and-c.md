@@ -9,24 +9,26 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-09-16"
+date: "2026-09-17"
 coverImage: "/blog/ai-engineering-vector-db-hnsw-index-recall-degrada.png"
 ---
 
-🚨 Production Alert: Our LLM app started hallucinating and freezing. Not a fun Monday.
+🚨 Production Alert: Silent Recall Degradation & Unresponsive Vector DBs During Heavy Upserts 🚨
 
-💥 We assumed HNSW indexes in our vector DB could handle continuous, high-volume data ingestion like a champ. Tutorials made it look easy! But under real-world load, this silent killer emerged.
+Ever had your search relevance mysteriously tank, or worse, your service start timing out under load? We did. It wasn't a bug in our LLM, but a silent killer in our vector database.
 
-🔬 The trap? HNSW is amazing for search, but its graph rewiring and background compaction during heavy upserts create a perfect storm:
-- Recall degrades as the graph gets messy.
-- Compaction locks parts of the index, causing read latency spikes and timeouts.
-- Memory pressure mounts.
+💥 The Naive Setup vs. The Trap:
+Tutorials and prototypes make HNSW indexes look like magic. Add data, search data, profit. But when you're ingesting thousands of vectors per second in real-time, that magic fades. The default configurations, optimized for read-heavy or static datasets, start to buckle.
 
-🛠️ Our battle-tested fix: A hybrid ingestion strategy.
-We now use a fast, in-memory index for real-time upserts. Periodically, we batch-merge these into the main HNSW index during off-peak hours. This decouples high-velocity writes from the core search index.
+🔬 The Root Cause:
+It's the HNSW graph itself. Continuous upserts fragment the graph structure, making search paths less efficient and degrading recall. Worse, background compaction processes, essential for maintaining performance, start acquiring locks. This leads to write contention and intermittent read unavailability – your service becomes a ghost.
 
-💡 Engineer Takeaway: Don't assume your vector DB's default write performance scales linearly with ingestion volume. Plan for it.
+🛠️ The Battle-Tested Fix:
+We implemented a dual-index strategy. A primary, actively updated HNSW index for recent, volatile data. A secondary, periodically rebuilt or merged index for older, stable data. This decouples writes from reads and allows for controlled, scheduled compaction on the stable index during off-peak hours. For extreme throughput, explore vector DBs with advanced concurrent indexing or tune HNSW parameters like `efConstruction` and `M` aggressively, and schedule compaction strategically.
 
-💬 How are you handling continuous data ingestion and writes in your production vector DBs?
+💡 Engineer Takeaway:
+Don't treat your vector index as a black box. Understand its write characteristics and plan for data churn. Default settings are a starting point, not a destination.
+
+💬 How are you managing vector database performance under heavy, continuous write loads? Share your strategies!
 
 #AIEngineering #LLMOps #ProductionAI #SystemDesign #SoftwareEngineering #MachineLearning
