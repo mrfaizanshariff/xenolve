@@ -9,24 +9,25 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-09-30"
+date: "2026-10-01"
 coverImage: "/blog/ai-engineering-the-silent-schema-truncation-trap-p.png"
 ---
 
-🚨 Production Alert: Our LLM-powered data extraction service started silently failing. Users reported missing fields, malformed records, and general chaos. Debugging felt like chasing ghosts.
+🚨 Production Alert: Your LLM-generated JSON is silently lying to you.
 
-💥 The standard tutorial approach: LLM generates JSON -> Pydantic validates. Works beautifully in a notebook. But in production, when LLMs hit their token limit, they don't gracefully stop. They just cut off. This leaves Pydantic with syntactically broken JSON. The validation failure is often masked as a generic LLM hallucination, not a predictable truncation.
+We hit a nasty bug where LLM outputs, meant to conform to Pydantic schemas, were passing validation most of the time. But then, data would mysteriously be missing, or fields would be `None` when they shouldn't be. Users saw broken features, we saw cryptic logs.
 
-🔬 The technical reality: LLMs have hard token limits. When this limit is reached mid-generation, the output string is abruptly terminated. If this happens while constructing a JSON object, you get invalid syntax – missing closing braces, truncated arrays, incomplete strings. Pydantic, expecting valid JSON, throws an error, but the reason for the error is the truncation, not a model "hallucination."
+💥 The Naive Setup: In dev, we'd prompt an LLM for structured JSON, then validate with Pydantic. It worked perfectly in notebooks. The trap? Production traffic and LLM token limits. When the LLM hits its output token limit, it doesn't throw an error; it just... stops. Mid-JSON.
 
-🛠️ The Battle-Tested Fix: We implemented a post-processing layer before Pydantic validation.
-1. Wrap `json.loads` in a `try-except JSONDecodeError`.
-2. If an error occurs, inspect the raw string for common truncation patterns (e.g., missing trailing `}` or `]`).
-3. Attempt to "repair" the JSON by appending missing closing delimiters. This yields a valid, albeit potentially incomplete, JSON.
-4. Alternatively, prompt the LLM to prioritize structural integrity or explicitly signal truncation.
+🔬 The Root Cause: LLMs truncate responses to stay within token limits. This often happens mid-structure. Pydantic, expecting a complete, valid JSON, might still parse something, but required fields are missing, leading to `None` or incomplete objects. The LLM never signals it was cut off.
 
-💡 Engineer Takeaway: Never trust LLM output to be perfectly formed. Always validate structure before parsing, and anticipate truncation.
+🛠️ The Battle-Tested Fix: A multi-stage validation.
+1. Lightweight JSON parser first: Catches basic structural errors.
+2. Pydantic validation: If this fails (missing required fields, wrong types), we trigger a re-prompt.
+3. Re-prompting Strategy: Instruct the LLM to complete the previous output, providing the truncated JSON as context. Or, explicitly ask it to state if it was truncated. We're also exploring LLM output parsers designed for graceful handling of partial JSON.
 
-💬 How are you handling LLM output truncation and validation in your production systems?
+💡 Engineer Takeaway: Never trust LLM output without robust, multi-layered validation, especially for structured data. Assume truncation is a possibility.
+
+💬 How are you handling LLM output validation and truncation in your production systems?
 
 #AIEngineering #LLMOps #ProductionAI #SystemDesign #SoftwareEngineering #MachineLearning
