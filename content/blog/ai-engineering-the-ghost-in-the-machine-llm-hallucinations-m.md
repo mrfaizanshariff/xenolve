@@ -9,23 +9,20 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-10-18"
+date: "2026-10-25"
 coverImage: "/blog/ai-engineering-the-ghost-in-the-machine-llm-halluc.png"
 ---
 
-🚨 Production Alert: Our system started silently failing. Not a crash, but subtle, insidious data corruption. The culprit? A ghost in the machine – LLM hallucinations we didn't even know were happening.
+🚨 Production went dark. Not a crash, but a silent, insidious failure. Our LLM-powered agent, meant to orchestrate API calls, was just… not doing its job. Users reported features failing, but logs showed no obvious errors.
 
-💥 The standard LLM function calling pattern felt solid. Generate JSON, call the function, done. It worked perfectly in dev. But in production, under real load and ambiguous user queries, the LLM started fabricating arguments for our downstream services. The system saw a valid JSON schema and blindly trusted it, never questioning why the LLM chose those specific, incorrect values.
+💥 We built it like the tutorials: LLM generates function call, we execute. Simple, elegant. It worked perfectly in dev. But in production, with real traffic and subtle variations, the LLM's "suggestions" started to fray.
 
-🔬 The technical reality: LLMs are probabilistic. When pushed, they can generate plausible-sounding but factually wrong arguments. Our function calling libraries were too trusting, treating schema-compliant output as gospel, ignoring the LLM's own textual output or external truth.
+🔬 The trap? LLMs are probabilistic. Even with the same prompt, the generated arguments for function calls can be slightly off. Missing optional params, a string where an int was expected, malformed JSON. These aren't LLM errors; they're API validation failures, silently dropped by downstream services. The LLM thought it was calling correctly, but the data was just wrong enough.
 
-🛠️ The fix: We implemented "hallucination-aware function calling."
-1. Capture LLM's raw text output and the structured function call.
-2. Use a lightweight secondary check (another LLM call or rules engine) to verify argument consistency with the LLM's text or known facts.
-3. If inconsistent, reject the call or flag for review.
+🛠️ The fix: A dedicated "function call validation and sanitization" layer. We now parse the LLM's raw output, validate it against our API's schema (Pydantic is your friend here!), and attempt to fix or default values before hitting the actual API. For critical paths, we even added a secondary LLM call to "verify" the arguments.
 
-💡 Engineer Takeaway: Never trust LLM output implicitly. Always validate structured outputs against the LLM's reasoning or external truth.
+💡 Engineer Takeaway: Never trust raw LLM output for critical, structured data. Always validate and sanitize.
 
-💬 How are you ensuring LLM-generated function calls are actually correct in your production systems?
+💬 How are you ensuring the reliability of LLM-driven function calls in your production systems?
 
 #AIEngineering #LLMOps #ProductionAI #SystemDesign #SoftwareEngineering #MachineLearning
