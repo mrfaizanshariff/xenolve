@@ -9,32 +9,24 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-10-26"
+date: "2026-10-27"
 coverImage: "/blog/ai-engineering-the-ghost-in-the-machine-llm-halluc.png"
 ---
 
-🚨 The Ghost in the Machine: LLM Hallucinations Masked by Non-Deterministic Function Calls
+🚨 Production Alert: We had a silent data corruption issue for weeks. Users reported intermittent, bizarre behavior in our LLM-powered workflow. Turns out, our AI was subtly messing up function calls.
 
-We had a production incident. Not a flashy crash, but a slow bleed of silent failures. Users reported weird behavior, but logs showed our LLM thought it was doing the right thing. The culprit? Our LLM was confidently calling functions with garbage arguments.
+💥 The trap? We built it like the tutorials: prompt -> LLM -> function call. It worked perfectly in dev. But in production, with real traffic and the LLM's inherent non-determinism, it started generating function arguments that were just... wrong. Missing keys, wrong types, nonsensical values. The downstream API would either error out (loudly) or, worse, accept bad data (silently).
 
-💥 The Naive Setup vs The Trap
+🔬 The root cause: Even with temperature 0, LLMs are probabilistic. Tiny variations in token generation can break structured output like JSON. The LLM "hallucinates" plausible-sounding but incorrect arguments when it's unsure, and our initial validation was too lenient.
 
-In notebooks, generating JSON for function calls looks clean. `model.invoke(prompt)` spits out valid-looking JSON. But in production, with varying traffic, slight prompt tweaks, or even just a different model version, that JSON can subtly break. The LLM's non-determinism bites hard. It might generate a string where an int is expected, or a nonsensical value that passes schema validation but breaks downstream logic. Silent failures are the worst.
+🛠️ The battle-tested fix: A multi-stage defense.
+1️⃣ Strict JSON parsing & Pydantic schema validation on raw LLM output.
+2️⃣ A sanitization layer: type coercion, default values for optional fields.
+3️⃣ For critical calls: automated re-prompting with clearer instructions if validation fails.
+4️⃣ Aggressive logging of all LLM outputs and validation results for pattern analysis.
 
-🔬 The Root Cause
+💡 Engineer Takeaway: Never trust LLM output directly for critical operations. Always validate, sanitize, and have a fallback.
 
-LLMs are probabilistic. When generating structured output like function arguments (often JSON), minor variations in internal states or token probabilities can lead to different outputs. This isn't a network issue or a memory leak; it's the LLM itself producing subtly malformed or semantically incorrect data for the function signature. The LLM thinks it's calling the function correctly, but the arguments are just wrong enough to cause downstream errors that aren't immediately obvious.
-
-🛠️ The Battle-Tested Fix
-
-We implemented a multi-stage validation layer before executing any LLM-generated function call:
-
-1. Strict Schema Validation: Pydantic models for every function signature. If the LLM's JSON doesn't match, reject it.
-2. Semantic Validation: Custom checks for argument values. Is the date format correct? Is the ID within a valid range? Does the query make sense?
-3. Tuning: Lowering temperature for function call generation (e.g., 0.1-0.3) and using few-shot examples that explicitly show correct argument formatting and values.
-
-💡 Engineer Takeaway: Never trust LLM-generated structured output directly. Always validate, validate, validate.
-
-💬 How do you handle LLM output validation in your production systems? What tools or patterns have saved you from silent failures?
+💬 How are you ensuring the reliability of LLM-generated function calls in your production systems?
 
 #AIEngineering #LLMOps #ProductionAI #SystemDesign #SoftwareEngineering #MachineLearning
