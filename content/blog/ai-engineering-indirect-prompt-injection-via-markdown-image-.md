@@ -9,24 +9,20 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-09-15"
+date: "2026-10-29"
 coverImage: "/blog/ai-engineering-indirect-prompt-injection-via-markd.png"
 ---
 
-🚨 Production Alert: Our AI agent went rogue, silently executing commands it shouldn't have. A seemingly innocuous user-submitted markdown file triggered a cascade of unintended actions.
+🚨 Production Alert: Our agent went rogue, silently executing commands from scraped web content. Not a fun Monday.
 
-💥 The trap? We assumed our markdown parser was safe. In a notebook, `![alt text](url)` is just data. In production, when an agent blindly trusts that `url` or `alt text` for downstream tool execution (like file access or API calls), it becomes a gaping security hole. This isn't direct prompt injection; it's a stealthy attack hiding in structured data.
+💥 We built an agent to process scraped markdown, expecting it to just extract text. Standard stuff, right? Notebooks worked perfectly. But in production, processing real-world, unvetted markdown? That's a different beast. The agent was designed to "understand" the content, and that included image tags.
 
-🔬 The root cause: Markdown parsers extract content. Our agent's execution pipeline didn't differentiate between a legitimate image URL and a malicious command disguised as one. The `![malicious_command](http://example.com)` or `![alt text](file:///etc/passwd)` was treated as a valid instruction.
+🔬 The trap was in the `<img>` tag's src attribute. Markdown parsers often treat URLs in src as just another piece of data. An attacker can craft a markdown like `![alt text](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxzY3JpcHQ+YWxlcnQoJ21hbGljaW91cyBjb2RlJyk7PC9zY3JpcHQ+PC9zdmc+ )` or a URL pointing to a malicious endpoint. When our agent tried to "process" or "fetch" this image, it inadvertently executed the embedded SVG or triggered a request to a compromised server.
 
-🛠️ The battle-tested fix: A multi-layered defense.
-1. Strict markdown parsing: Reject malformed or unexpected tags.
-2. URL validation: Whitelist schemes (http/https) and domains. Block local file paths.
-3. Content Security Policy (CSP): Restrict resource fetching.
-4. Tool input validation: Explicitly define and validate expected inputs for every tool. Treat all external data as untrusted.
+🛠️ The fix: A strict markdown sanitization layer. We now explicitly disallow `data:` URIs and any protocols other than `http`/`https` for image sources. For `http`/`https`, we enforce an allowlist of trusted domains. Alternatively, if your agent doesn't need to interpret image sources, just extract the `alt` text or filename. Don't fetch what you don't need to.
 
-💡 Engineer Takeaway: Never trust user-provided structured data. Sanitize and validate everything before it touches your agent's execution context or downstream tools.
+💡 Engineer Takeaway: Never trust external markdown. Treat every URL within it as a potential attack vector, especially when your agent's logic might interpret it.
 
-💬 How are you securing your LLM agents against indirect prompt injection vectors? Share your strategies!
+💬 How are you securing your LLM agents against malicious input from external data sources?
 
 #AIEngineering #LLMOps #ProductionAI #SystemDesign #SoftwareEngineering #MachineLearning
