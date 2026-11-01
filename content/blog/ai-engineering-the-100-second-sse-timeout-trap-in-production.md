@@ -9,26 +9,37 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-10-23"
+date: "2026-11-01"
 coverImage: "/blog/ai-engineering-the-100-second-sse-timeout-trap-in-.png"
 ---
 
 🚨 The 100-Second SSE Timeout Trap in Production LLM Streaming
 
-Ever had your LLM streaming responses just... stop? Mid-sentence? User reports flooding in, but your app logs look fine. You're pulling your hair out. This was us.
+Ever had your LLM streaming responses just... die? Mid-sentence? Users screaming about incomplete answers, and you're staring at logs, convinced it's LLM latency? We've been there.
 
-💥 The Naive Setup vs The Trap:
-Tutorials show Server-Sent Events (SSE) for LLM streaming. Easy, right? Just stream tokens. It works great in your dev environment. Then, production hits, and after about 100 seconds, the stream dies. Users get half-formed answers. Frustration.
+💥 The Naive Setup vs The Trap
 
-🔬 The Root Cause:
-It's not your LLM. It's the network. Cloud load balancers (AWS ALB, etc.) and reverse proxies (Cloudflare) have default idle timeouts, often around 60-120 seconds. SSE is a long-lived connection. If nothing is sent for a bit, these proxies aggressively close the connection, thinking it's dead. Your LLM might still be processing, but the pipe is cut.
+Tutorials show Server-Sent Events (SSE) for LLM streaming. It's elegant, works in dev. But push it to production with real users and a slightly slower LLM generation step, and suddenly, streams disconnect around the 100-second mark. It feels like LLM magic failing, but it's not.
 
-🛠️ The Battle-Tested Fix:
-Implement an SSE "heartbeat" or "keep-alive" mechanism. From your LLM backend, periodically send a no-op SSE event. A simple empty comment `\n\n` or a `event: ping` with empty data, sent every 30-45 seconds (shorter than the shortest proxy timeout). This keeps the connection active, signaling to the network that it's still alive.
+🔬 The Root Cause
 
-💡 Engineer Takeaway:
-Assume intermediate network infrastructure will aggressively time out long-lived connections. Build keep-alives into your streaming protocols from day one.
+The culprit? Not the LLM, but the network infrastructure between your app and the user. Most cloud load balancers (AWS ALB, GCP LB) and reverse proxies (Cloudflare, Nginx) have default HTTP idle connection timeouts, often 60-120 seconds. When your LLM takes a bit longer to generate the next token, the connection sits idle. The proxy, seeing no activity, aggressively tears down the underlying TCP connection. The SSE stream dies silently.
 
-💬 How are you keeping your LLM streams alive in production? What network gotchas have you hit?
+🛠️ The Battle-Tested Fix
+
+The fix is a simple, yet crucial, SSE heartbeat. Your LLM backend needs to periodically send a no-op SSE event to the client.
+
+Example heartbeat:
+
+event: heartbeat
+data: {}
+
+Send this every 30-45 seconds. This keeps the connection "active" in the eyes of the proxy, preventing it from timing out. It's a tiny packet of life that keeps the real data flowing.
+
+💡 Engineer Takeaway
+
+Assume your network infrastructure has hidden timeouts. For any long-lived streaming connection (SSE, WebSockets), proactively manage connection keep-alive.
+
+💬 How do you handle network timeouts in your LLM streaming pipelines? Share your strategies!
 
 #AIEngineering #LLMOps #ProductionAI #SystemDesign #SoftwareEngineering #MachineLearning
