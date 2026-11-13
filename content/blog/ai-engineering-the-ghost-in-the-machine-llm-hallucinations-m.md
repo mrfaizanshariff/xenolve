@@ -9,22 +9,22 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-11-12"
+date: "2026-11-13"
 coverImage: "/blog/ai-engineering-the-ghost-in-the-machine-llm-halluc.png"
 ---
 
-🚨 Production Alert: Our API integrations were failing intermittently. Seemingly random errors, dismissed as transient network glitches or LLM "hallucinations." The real culprit? A silent killer in LLM-driven function calls.
+🚨 Production Alert: Our LLM-powered feature started silently failing. Users reported bizarre behavior, but logs showed no explicit errors. The system was working, just… wrong.
 
-💥 Notebooks and prototypes make it look easy: prompt an LLM, get a JSON, call an API. But in production, with real traffic and strict schemas, this breaks. The LLM can generate syntactically valid JSON that's semantically broken or incomplete. This non-determinism, due to prompt nuances or model stochasticity, leads to silent downstream failures.
+💥 We thought we had it nailed. LLM generates JSON for a function call, we parse and execute. Simple, right? This works fine in a notebook. But in production, with real traffic and slightly different contexts, the LLM's output for function arguments became non-deterministic. Syntactically valid JSON, but semantically nonsensical. The function would execute with garbage data, no exceptions thrown. The "ghost in the machine."
 
-🔬 The trap is assuming LLM output is always deterministic and perfectly valid. When an LLM generates arguments for a function call (e.g., a date range, a specific ID), subtle ambiguities or token limits can lead to outputs that look right but aren't. This passes schema validation but breaks downstream logic.
+🔬 The culprit? LLM's probabilistic nature. Even with identical prompts, the decoding process (temperature, sampling) can yield subtly different, yet valid, JSON. This variability meant arguments could be technically parsable but violate our domain logic – a silent, insidious bug.
 
-🛠️ Our battle-tested fix: A multi-stage validation and sanitization layer before executing any LLM-generated function call.
-1. Strict schema validation (Pydantic/OpenAPI).
-2. Semantic validation for critical fields (auxiliary logic or a smaller, focused LLM call).
-3. Graceful fallback/retry mechanisms with specific error feedback to the LLM.
+🛠️ The fix wasn't just better prompting. We built a multi-stage validation layer:
+1. Strict JSON schema validation.
+2. Semantic validation: Range checks, valid enum values, referential integrity against our domain.
+3. A fallback: If validation failed, we'd re-prompt the LLM, explicitly asking it to correct its previous output or provide a more constrained response.
 
-💡 Engineer Takeaway: Never trust LLM output directly for critical system integrations. Always validate rigorously.
+💡 Engineer Takeaway: Never trust LLM output directly for critical function calls. Always validate, then validate again, and have a plan for when it gets it wrong.
 
 💬 How are you ensuring the reliability of LLM-generated function calls in your production systems?
 
