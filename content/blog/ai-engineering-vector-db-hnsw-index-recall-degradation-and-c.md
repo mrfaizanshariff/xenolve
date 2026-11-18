@@ -9,20 +9,20 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-11-17"
+date: "2026-11-18"
 coverImage: "/blog/ai-engineering-vector-db-hnsw-index-recall-degrada.png"
 ---
 
-🚨 Production Alert: Our RAG system started silently failing. Search relevance tanked, and sometimes, it just… stopped responding. Not a crash, but a slow, painful degradation.
+🚨 Production Alert: Recall dropped, latency spiked. Our vector search went from lightning fast to molasses overnight. No code changes, no obvious errors. Just… broken.
 
-💥 We thought it was just general load. Standard tutorials make HNSW indexes look like magic. They work beautifully in notebooks. But under heavy, continuous upserts in production? That's where the trap is.
+💥 We followed the docs, treating vector DB upserts like any other write. Batching? Sure, but not strategic batching. The tutorials work for prototypes, but the silent killer? Continuous, heavy ingestion into HNSW indexes. It’s like constantly rearranging furniture in a library while people are trying to find books.
 
-🔬 The culprit? The HNSW index itself. Constant writes trigger background compaction and rebalancing. These operations can lock parts of the index, hurting inserts and, critically, degrading search recall. The index gets fragmented, not reflecting the latest data accurately.
+🔬 Under the hood, frequent, small upserts fragment the HNSW graph. It messes up the optimal structure, degrading search recall. Worse, some DBs kick off background compaction/rebuilding to fix this, which locks parts of the index. Hello, latency spikes and throughput collapse.
 
-🛠️ The fix we landed on: A dual-index strategy. A primary, optimized HNSW for reads, and a secondary, more volatile store for incoming data. We then orchestrate periodic merges of the secondary into the primary, ideally during off-peak hours or in controlled batches. This decouples write load from read performance.
+🛠️ The fix? A tiered indexing strategy. We now use a write-optimized, simpler index for recent data (think flat index or smaller HNSW). Periodically, we batch-merge this into our main, read-optimized HNSW. This keeps the main index clean and performant. Also, monitor index health metrics religiously and schedule compactions during off-peak hours.
 
-💡 Engineer Takeaway: Never assume your vector DB index will scale writes and reads equally under continuous load. Design for write-heavy ingestion separately.
+💡 Engineer Takeaway: Assume your vector DB's "write" operations have a significant read impact, especially under load. Design for it.
 
-💬 How are you managing write contention and index health in your production RAG systems?
+💬 How are you handling high-volume writes and index maintenance in your vector search stacks?
 
 #AIEngineering #LLMOps #ProductionAI #SystemDesign #SoftwareEngineering #MachineLearning
