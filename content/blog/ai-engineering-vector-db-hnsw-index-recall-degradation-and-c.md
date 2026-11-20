@@ -9,20 +9,20 @@ tags:
   - "LLMOps"
   - "System Design"
   - "Production AI"
-date: "2026-11-18"
+date: "2026-11-20"
 coverImage: "/blog/ai-engineering-vector-db-hnsw-index-recall-degrada.png"
 ---
 
-🚨 Production Alert: Recall dropped, latency spiked. Our vector search went from lightning fast to molasses overnight. No code changes, no obvious errors. Just… broken.
+🚨 Production Alert: Our RAG system's recall silently tanked. Not a model drift issue, not a prompt bug. It was our vector DB.
 
-💥 We followed the docs, treating vector DB upserts like any other write. Batching? Sure, but not strategic batching. The tutorials work for prototypes, but the silent killer? Continuous, heavy ingestion into HNSW indexes. It’s like constantly rearranging furniture in a library while people are trying to find books.
+💥 We followed the docs: batch upserts, HNSW index. Worked perfectly in staging. Then, heavy, continuous data ingestion hit. Retrieval accuracy plummeted over weeks. Users saw "bad answers" but couldn't pinpoint why. The culprit? HNSW's read-optimized nature clashing with write-heavy loads.
 
-🔬 Under the hood, frequent, small upserts fragment the HNSW graph. It messes up the optimal structure, degrading search recall. Worse, some DBs kick off background compaction/rebuilding to fix this, which locks parts of the index. Hello, latency spikes and throughput collapse.
+🔬 Under the hood, frequent upserts fragmented the HNSW graph. Traversals became inefficient, recall degraded. Worse, some implementations lock during "compaction" phases, killing latency and throughput. Our reads were starving writes, and writes were corrupting reads.
 
-🛠️ The fix? A tiered indexing strategy. We now use a write-optimized, simpler index for recent data (think flat index or smaller HNSW). Periodically, we batch-merge this into our main, read-optimized HNSW. This keeps the main index clean and performant. Also, monitor index health metrics religiously and schedule compactions during off-peak hours.
+🛠️ The fix: a write-optimized indexing strategy. We decoupled ingestion. New data lands in a temporary store. Periodically, during low traffic, we merge this data into a new HNSW index segment and swap it in. Think of it like a database's offline index rebuild, but for vectors. Alternatively, explore vector DBs with better concurrent write support or use read replicas for ingestion.
 
-💡 Engineer Takeaway: Assume your vector DB's "write" operations have a significant read impact, especially under load. Design for it.
+💡 Engineer Takeaway: Never assume your vector DB's default indexing strategy scales for continuous writes. Design for ingestion and query performance separately.
 
-💬 How are you handling high-volume writes and index maintenance in your vector search stacks?
+💬 How are you handling high-volume, continuous vector data ingestion in production?
 
 #AIEngineering #LLMOps #ProductionAI #SystemDesign #SoftwareEngineering #MachineLearning
